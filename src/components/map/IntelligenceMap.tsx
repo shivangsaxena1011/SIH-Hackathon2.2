@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useMemo } from 'react';
+import { useState, useRef, useMemo, useEffect } from 'react';
 import type { MapPoint } from '@/types';
 import { getEntityTypeColor } from '@/lib/utils';
 import { MapEventDetail } from './MapEventDetail';
@@ -8,10 +8,22 @@ import { ZoomIn, ZoomOut, Maximize } from 'lucide-react';
 
 interface IntelligenceMapProps {
   points: MapPoint[];
+  selectedPointId?: string;
+  onSelectPoint?: (point: MapPoint) => void;
 }
 
-export function IntelligenceMap({ points }: IntelligenceMapProps) {
+export function IntelligenceMap({ points, selectedPointId, onSelectPoint }: IntelligenceMapProps) {
   const [selectedPoint, setSelectedPoint] = useState<MapPoint | null>(null);
+
+  useEffect(() => {
+    if (selectedPointId) {
+      const found = points.find(p => p.id === selectedPointId || p.eventId === selectedPointId);
+      if (found) {
+        setSelectedPoint(found);
+      }
+    }
+  }, [selectedPointId, points]);
+
   const [zoom, setZoom] = useState(1);
   const [pan, setPan] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
@@ -129,7 +141,11 @@ export function IntelligenceMap({ points }: IntelligenceMapProps) {
               <g 
                 key={`point-${i}`} 
                 transform={`translate(${x}, ${y})`}
-                onClick={(e) => { e.stopPropagation(); setSelectedPoint(point); }}
+                onClick={(e) => { 
+                  e.stopPropagation(); 
+                  setSelectedPoint(point); 
+                  onSelectPoint?.(point);
+                }}
                 className="cursor-pointer"
               >
                 <circle r={isSelected ? 12 : 8} fill={`${color}40`} />

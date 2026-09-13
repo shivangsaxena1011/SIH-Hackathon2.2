@@ -8,6 +8,8 @@ import { cn } from '@/lib/utils';
 
 interface TimelineViewProps {
   events: Event[];
+  selectedEventId?: string;
+  onSelectEvent?: (event: Event) => void;
 }
 
 const getEventIcon = (type: string) => {
@@ -21,7 +23,7 @@ const getEventIcon = (type: string) => {
   }
 };
 
-export function TimelineView({ events }: TimelineViewProps) {
+export function TimelineView({ events, selectedEventId, onSelectEvent }: TimelineViewProps) {
   return (
     <div className="relative py-8 px-4 sm:px-10">
       <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gray-800 transform -translate-x-1/2" />
@@ -29,6 +31,7 @@ export function TimelineView({ events }: TimelineViewProps) {
       <div className="space-y-12">
         {events.map((event, index) => {
           const isLeft = index % 2 === 0;
+          const isSelected = selectedEventId === event.id;
           
           return (
             <motion.div
@@ -48,7 +51,15 @@ export function TimelineView({ events }: TimelineViewProps) {
                   {getEventIcon(event.entityType)}
                 </div>
 
-                <div className="bg-[#1A0F2E] border border-gray-800 p-5 rounded-2xl shadow-xl hover:border-gray-600 transition-colors group cursor-pointer relative overflow-hidden">
+                <div 
+                  onClick={() => onSelectEvent?.(event)}
+                  className={cn(
+                    "bg-[#1A0F2E] border p-5 rounded-2xl shadow-xl transition-all group cursor-pointer relative overflow-hidden",
+                    isSelected 
+                      ? "border-purple-500 ring-2 ring-purple-500/40 bg-[#251542]" 
+                      : "border-gray-800 hover:border-gray-600"
+                  )}
+                >
                   
                   {/* Confidence bar */}
                   <div className="absolute bottom-0 left-0 h-1 bg-gray-800 w-full">

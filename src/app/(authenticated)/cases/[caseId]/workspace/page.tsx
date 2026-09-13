@@ -278,12 +278,17 @@ export default function CaseWorkspacePage({
             {/* Embedded Replay Controller */}
             <InvestigationReplay
               events={caseEvents}
+              selectedEventId={activeEvent?.id}
               onEventChange={(ev) => setActiveEvent(ev)}
             />
 
             {/* Timeline Stream */}
             <div className="rounded-xl border border-purple-500/20 bg-[#130B24] p-4">
-              <TimelineView events={caseEvents} />
+              <TimelineView 
+                events={caseEvents} 
+                selectedEventId={activeEvent?.id}
+                onSelectEvent={(ev) => setActiveEvent(ev)}
+              />
             </div>
           </div>
         )}
@@ -298,7 +303,14 @@ export default function CaseWorkspacePage({
               </div>
             )}
             <div className="rounded-xl border border-purple-500/30 overflow-hidden bg-[#130B24] min-h-[550px]">
-              <IntelligenceMap points={mapPoints} />
+              <IntelligenceMap 
+                points={mapPoints} 
+                selectedPointId={activeEvent?.id}
+                onSelectPoint={(pt) => {
+                  const ev = caseEvents.find(e => e.id === pt.eventId || e.id === pt.id);
+                  if (ev) setActiveEvent(ev);
+                }}
+              />
             </div>
           </div>
         )}
