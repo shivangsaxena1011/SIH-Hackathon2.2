@@ -70,7 +70,7 @@ export default function InvestigationBriefModal({
               </div>
               <div>
                 <span className="text-xs font-mono text-purple-400 font-bold uppercase tracking-wider block">
-                  OFFICIAL INVESTIGATION DOSSIER
+                  65B-ORIENTED ELECTRONIC EVIDENCE & INVESTIGATION BRIEF
                 </span>
                 <h2 className="text-lg font-space font-bold text-white">
                   Case #{brief.caseNumber} — {brief.caseTitle}

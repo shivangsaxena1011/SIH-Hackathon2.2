@@ -92,7 +92,7 @@ export function generateInvestigationBrief(caseQuery: string, generatedBy: strin
     timelineHighlights,
     aiLeadRecommendations,
     chainOfCustodyNotice:
-      'All cryptographic hashes recorded herein have undergone continuous SHA-256 integrity verification. Digital signatures and audit records are preserved for judicial admissibility under Section 65B of the Indian Evidence Act.'
+      'All cryptographic hashes recorded herein have undergone continuous SHA-256 integrity verification. Electronic evidence records are formatted for Section 65B custody proceedings under the Indian Evidence Act (Prototype demonstration — physical judicial attestation required in production).'
   };
 }
 

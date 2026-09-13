@@ -38,11 +38,19 @@ export default function AuditPage() {
 
   return (
     <div className="p-6 max-w-7xl mx-auto space-y-6">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-purple-500/20 pb-4">
         <div>
-          <h1 className="text-3xl font-bold font-space text-white">AUDIT LOG CENTER</h1>
-          <p className="text-gray-400 mt-2 text-sm">
-            Tamper-evident runtime audit ledger recording all system access and actions.
+          <div className="flex items-center gap-2 mb-1">
+            <h1 className="text-3xl font-bold font-space text-white">APPEND-ONLY RUNTIME AUDIT LEDGER</h1>
+            <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30 font-bold">
+              PROTOTYPE AUDIT
+            </span>
+          </div>
+          <p className="text-gray-400 text-xs sm:text-sm">
+            Append-only runtime audit stream capturing every officer session, document evaluation, and query.
+          </p>
+          <p className="text-[11px] font-mono text-gray-500 mt-1">
+            Prototype implementation — persistent/WORM audit storage would be used in production.
           </p>
         </div>
         <div className="flex space-x-3">
