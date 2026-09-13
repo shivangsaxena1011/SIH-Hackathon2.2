@@ -253,7 +253,7 @@ export default function PathFinderModal({
                           ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-500/30'
                           : 'bg-amber-950/80 text-amber-300 border border-amber-500/30'
                       }`}>
-                        {step.provenance?.type || 'INFERRED'} ({step.provenance?.sourceEngine || 'SENTINEL Engine'})
+                        {step.provenance?.type || 'INFERRED'} ({step.provenance?.sourceEngine || 'TRISHUL Engine'})
                       </span>
                     </div>
                   ))}

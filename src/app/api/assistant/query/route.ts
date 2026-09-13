@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { seedPersons } from '@/data/seed';
+import { getNodeDegree } from '@/lib/graph/graph-service';
 
 export async function POST(req: Request) {
   try {
@@ -14,7 +15,8 @@ export async function POST(req: Request) {
 
     // Query 1: Connections for Rahul Mehra
     if (q.includes('rahul mehra') && (q.includes('connection') || q.includes('associate') || q.includes('link'))) {
-      response = `Rahul Mehra (Person ID: P-1042, Alias: R. Mehra) has 7 direct connections in the intelligence network:
+      const degree = getNodeDegree('P-1042');
+      response = `Rahul Mehra (Person ID: P-1042, Alias: R. Mehra) has ${degree} direct connections in the intelligence network:
 • Associated Person: Arjun Verma (P-2041) — Observed together at Industrial Sector 7 and shared vehicle events.
 • Associated Vehicle: MP09-DEMO-4821 (Swift Sedan) — Vehicle registered / tracked with Rahul Mehra.
 • Associated Identifier: ID-DEMO-88421 — Monitored phone number (+91-XXXX-XXX-421).
@@ -107,7 +109,7 @@ export async function POST(req: Request) {
     }
     // Query 7: Path finding & entity connection tracing
     else if (q.includes('path') || q.includes('trace') || (q.includes('connect') && (q.includes('between') || q.includes('how')))) {
-      response = `SENTINEL Path Finder traced a 2-hop connection between Rahul Mehra (P-1042) and Harsh Pandey (P-1412):
+      response = `TRISHUL Path Finder traced a 2-hop connection between Rahul Mehra (P-1042) and Harsh Pandey (P-1412):
 • Step 1: Rahul Mehra [PERSON] — USES → Vehicle MP09-DEMO-4821 [VEHICLE] (94% confidence via Transport Department registration)
 • Step 2: Vehicle MP09-DEMO-4821 [VEHICLE] — APPEARED_AT → Transit Checkpoint Alpha (91% confidence via ANPR sensor log)
 • Step 3: Vehicle MP09-DEMO-4821 [VEHICLE] — LINKED_TO → Harsh Pandey [PERSON] (70% confidence via Cross-Case Analysis)
@@ -153,7 +155,7 @@ Contributing Risk Factors:
 
 STATUTORY NOTICE: PRIORITY != GUILT. This score directs investigative resource allocation for authorized officer review.`;
       sources = [
-        "SENTINEL Priority Scoring Engine",
+        "TRISHUL Priority Scoring Engine",
         "Case #2026-041 Evidence Register",
         "Forensic Analysis DOC-2026-041-009"
       ];

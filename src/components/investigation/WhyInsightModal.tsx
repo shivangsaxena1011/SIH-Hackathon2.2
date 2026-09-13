@@ -50,7 +50,7 @@ export default function WhyInsightModal({
                   EXPLAINABLE AI EVIDENCE CHAIN
                 </span>
                 <h3 className="text-lg font-space font-bold text-white">
-                  Why This Insight? — How SENTINEL Connected Entities
+                  Why This Insight? — How TRISHUL Correlated Entities (Explainable Lead)
                 </h3>
               </div>
             </div>
@@ -136,7 +136,7 @@ export default function WhyInsightModal({
 
           {/* Footer Notice */}
           <div className="pt-3 border-t border-purple-500/20 flex items-center justify-between text-[11px] text-gray-500">
-            <span>PRIORITY != GUILT • AI recommendations must be corroborated by authorized officers.</span>
+            <span>PRIORITY ≠ GUILT • AI-generated leads represent candidate associations requiring human review.</span>
             <button
               onClick={onClose}
               className="px-4 py-1.5 rounded-lg bg-purple-900/40 hover:bg-purple-900/60 text-purple-200 border border-purple-500/30 text-xs transition-colors"

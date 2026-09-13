@@ -117,7 +117,7 @@ export default function InvestigationChangeBanner({ caseQuery }: InvestigationCh
 
               {/* Footer */}
               <div className="pt-3 border-t border-purple-500/20 flex items-center justify-between">
-                <span className="text-[11px] text-gray-500">Deltas verified via SENTINEL Change Monitor</span>
+                <span className="text-[11px] text-gray-500 font-mono">Deltas verified via TRISHUL Change Monitor (PS189)</span>
                 <button
                   onClick={() => {
                     setIsOpen(false);

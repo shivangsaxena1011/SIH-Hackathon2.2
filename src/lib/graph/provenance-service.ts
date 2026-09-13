@@ -22,7 +22,7 @@ export function getRelationshipProvenance(
       sourceEntityName: sourceName,
       targetEntityName: targetName,
       type: 'INFERRED',
-      sourceEngine: 'SENTINEL Graph Correlation Engine v2.4',
+      sourceEngine: 'TRISHUL Graph Correlation Engine (PS189)',
       sourceDocumentOrSensor: 'Automated Multi-Source Linkage',
       recordedAt: new Date().toISOString(),
       confidence: 75,
@@ -44,7 +44,7 @@ export function getRelationshipProvenance(
 
   const engine = isRecorded
     ? 'Official Jurisdictional Registry / Sensor Log'
-    : 'SENTINEL AI Entity & Relationship Ingestion Engine';
+    : 'TRISHUL AI Entity & Relationship Ingestion Engine';
 
   return {
     relationshipId: rel.id,
