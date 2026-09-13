@@ -10,11 +10,13 @@ import {
   Search,
   Share2,
   SlidersHorizontal,
-  ArrowLeft
+  ArrowLeft,
+  ShieldAlert
 } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { findCanonicalCase } from '@/lib/cases/case-service';
+import { findCanonicalCase, isCaseAuthorized } from '@/lib/cases/case-service';
+import { useAuth } from '@/lib/auth/auth-context';
 import { calculateInvestigationPriorityScore } from '@/lib/ai/priority-score';
 import { getCaseGraph, getNodeDegree } from '@/lib/graph/graph-service';
 import { seedEvents, seedLocations, seedInsights, seedCases, seedPersons } from '@/data/seed';
@@ -42,6 +44,9 @@ export default function CaseWorkspacePage({
   if (!c) {
     notFound();
   }
+
+  const { user } = useAuth();
+  const userRole = user?.role || 'INVESTIGATING_OFFICER';
 
   const [activeTab, setActiveTab] = useState<WorkspaceTab>('NETWORK');
   const [isPathFinderOpen, setIsPathFinderOpen] = useState(false);
@@ -116,6 +121,42 @@ export default function CaseWorkspacePage({
       return true;
     });
   }, [graphData.nodes, queryType, querySearch]);
+
+  // Security authorization enforcement for restricted cases (e.g. C-999 / Operation Restricted)
+  if (!isCaseAuthorized(c.id, userRole)) {
+    return (
+      <div className="max-w-2xl mx-auto mt-16 p-8 bg-[#1A0F2E] border-2 border-red-500/50 rounded-2xl text-center space-y-6 shadow-2xl">
+        <div className="w-16 h-16 rounded-full bg-red-500/20 border border-red-500/40 flex items-center justify-center mx-auto text-red-400">
+          <ShieldAlert className="w-8 h-8" />
+        </div>
+        <div>
+          <h1 className="text-3xl font-bold font-space text-red-400 tracking-wider">ACCESS DENIED</h1>
+          <p className="text-xs text-red-500/80 font-mono mt-1 uppercase">SECURITY ENFORCEMENT • RESTRICTED CLASSIFICATION</p>
+        </div>
+        <div className="p-4 bg-black/40 rounded-xl border border-red-500/20 text-sm text-gray-300">
+          <p className="font-medium text-red-300 mb-1">Investigation Access Blocked:</p>
+          <p>Case #{c.caseNumber} ({c.title}) is restricted to Command Clearance (SUPER_ADMIN). Your current active role ({userRole}) is not authorized to access this workspace.</p>
+        </div>
+        <p className="text-xs text-gray-500">
+          A security violation log has been recorded in the append-only runtime audit ledger (Result: DENIED).
+        </p>
+        <div className="flex justify-center gap-4">
+          <Link
+            href="/cases"
+            className="px-5 py-2.5 bg-gray-800 hover:bg-gray-700 text-gray-200 text-sm font-medium rounded-xl transition flex items-center gap-2 border border-gray-700"
+          >
+            <ArrowLeft className="w-4 h-4" /> Return to Cases
+          </Link>
+          <Link
+            href="/audit"
+            className="px-5 py-2.5 bg-red-500/20 hover:bg-red-500/30 text-red-300 text-sm font-medium rounded-xl transition border border-red-500/40"
+          >
+            View Audit Log
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#0B0716] text-gray-100 flex flex-col">

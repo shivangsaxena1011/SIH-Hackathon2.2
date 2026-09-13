@@ -217,10 +217,11 @@ export default function TopBar({ user: initialUser }: TopBarProps) {
 
           <button 
             onClick={() => logout()}
-            className="p-1.5 text-gray-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors ml-1"
-            title="Secure Logout"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold text-rose-300 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 hover:border-rose-500/50 rounded-lg transition-all ml-1 group"
+            title="Secure Logout (Terminate Session)"
           >
-            <LogOut size={16} />
+            <LogOut size={14} className="text-rose-400 group-hover:-translate-x-0.5 transition-transform" />
+            <span className="hidden sm:inline font-mono uppercase text-[10px] tracking-wider">Logout</span>
           </button>
         </div>
       </div>

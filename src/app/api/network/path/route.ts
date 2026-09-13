@@ -9,7 +9,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Source and target entities are required' }, { status: 400 });
     }
 
-    const path = findInvestigationPath(source, target, maxHops || 5);
+    const hops = Math.min(Math.max(1, parseInt(String(maxHops || '5'), 10) || 5), 10);
+    const path = findInvestigationPath(source, target, hops);
     if (!path) {
       return NextResponse.json({ success: false, message: 'No viable connecting path identified within maximum traversal depth.' }, { status: 404 });
     }
@@ -24,7 +25,8 @@ export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const source = searchParams.get('source');
   const target = searchParams.get('target');
-  const maxHops = parseInt(searchParams.get('maxHops') || '5', 10);
+  const rawHops = parseInt(searchParams.get('maxHops') || '5', 10);
+  const maxHops = Math.min(Math.max(1, Number.isFinite(rawHops) ? rawHops : 5), 10);
 
   if (!source || !target) {
     return NextResponse.json({ error: 'Source and target query parameters required' }, { status: 400 });

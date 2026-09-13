@@ -33,6 +33,7 @@ export function findInvestigationPath(
   targetQuery: string,
   maxHops: number = 5
 ): InvestigationPath | null {
+  const safeHops = Math.min(Math.max(1, Number.isFinite(maxHops) ? Math.floor(maxHops) : 5), 10);
   const fullGraph = getFullGraph();
   if (!fullGraph.nodes.length) return null;
 
@@ -91,7 +92,7 @@ export function findInvestigationPath(
       break;
     }
 
-    if (current.pathEdges.length >= maxHops) continue;
+    if (current.pathEdges.length >= safeHops) continue;
 
     const neighbors = adj.get(current.currentId) || [];
     for (const { neighborId, edge } of neighbors) {

@@ -91,6 +91,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
     try {
       localStorage.removeItem('sih_user');
+      sessionStorage.clear();
     } catch {}
     setUser(null);
     router.push('/login');

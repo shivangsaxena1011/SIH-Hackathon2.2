@@ -27,8 +27,10 @@ import {
   Bot,
   Shield,
   Play,
-  SlidersHorizontal
+  SlidersHorizontal,
+  LogOut
 } from 'lucide-react';
+import { useAuth } from '@/lib/auth/auth-context';
 
 interface SidebarProps {
   userRole: UserRole;
@@ -70,6 +72,7 @@ const ADVANCED_SUPPORTING_NAV: NavItem[] = [
 export default function Sidebar({ userRole }: SidebarProps) {
   const pathname = usePathname();
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const { logout } = useAuth();
 
   const renderNavGroup = (items: NavItem[], groupTitle?: string) => (
     <div className="space-y-1">
@@ -178,10 +181,25 @@ export default function Sidebar({ userRole }: SidebarProps) {
         {renderNavGroup(ADVANCED_SUPPORTING_NAV, 'Advanced & Supporting')}
       </nav>
 
-      <div className="p-3 border-t border-purple-500/20 flex justify-end">
+      <div className={cn("border-t border-purple-500/20 bg-[#0F0A1C]/80", isCollapsed ? "p-2 space-y-2 flex flex-col items-center" : "p-3 space-y-2")}>
+        <button
+          onClick={() => logout()}
+          className={cn(
+            "rounded-lg text-xs font-semibold text-rose-300 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 hover:border-rose-500/50 transition-all flex items-center group",
+            isCollapsed ? "p-2 justify-center w-full" : "w-full px-3 py-2 gap-2.5"
+          )}
+          title="Sign Out / Secure Logout"
+        >
+          <LogOut size={16} className="text-rose-400 group-hover:-translate-x-0.5 transition-transform shrink-0" />
+          {!isCollapsed && <span>Sign Out / Logout</span>}
+        </button>
+
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
-          className="p-1.5 rounded-lg text-gray-400 hover:bg-white/10 hover:text-white transition-colors flex items-center justify-center w-full text-xs font-medium gap-2"
+          className={cn(
+            "rounded-lg text-gray-400 hover:bg-white/10 hover:text-white transition-colors flex items-center text-xs font-medium",
+            isCollapsed ? "p-2 justify-center w-full" : "p-1.5 justify-center w-full gap-2"
+          )}
           title={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
         >
           {isCollapsed ? <ChevronRight size={16} /> : (
