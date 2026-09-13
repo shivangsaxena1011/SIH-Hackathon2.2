@@ -116,10 +116,13 @@ export default function DocumentDetailPage() {
         {/* Header section */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-gray-800 pb-4">
         <div>
-          <div className="flex items-center gap-3 mb-1">
-            <h1 className="text-2xl font-bold text-white font-space">DOCUMENT ANALYSIS</h1>
-            <span className="bg-purple-500/20 text-purple-400 text-xs px-2 py-0.5 rounded border border-purple-500/30 font-medium font-mono">
-              DEMO ANALYTICS
+          <div className="flex items-center gap-2 mb-1 flex-wrap">
+            <h1 className="text-2xl font-bold text-white font-space">DOCUMENT FORENSIC SCREENING</h1>
+            <span className="bg-purple-500/20 text-purple-300 text-xs px-2.5 py-0.5 rounded border border-purple-500/30 font-bold font-mono">
+              SIH 2026 • SYNTHETIC FIXTURE
+            </span>
+            <span className="bg-pink-500/15 text-pink-300 text-xs px-2 py-0.5 rounded border border-pink-500/30 font-mono font-bold">
+              STEP 01: DOCUMENT
             </span>
           </div>
           <p className="text-gray-400 text-sm">{doc.fileName} • {doc.documentType} • Linked to Case {doc.caseId}</p>

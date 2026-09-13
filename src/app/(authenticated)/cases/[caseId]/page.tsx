@@ -157,10 +157,20 @@ export default function CaseDetailPage() {
         {/* Header */}
       <div className="bg-[#1A0F2E] rounded-xl border border-purple-500/20 p-6 flex flex-col md:flex-row justify-between gap-4">
         <div>
-          <div className="flex items-center gap-3 mb-2">
+          <div className="flex items-center gap-3 mb-2 flex-wrap">
             <h1 className="text-2xl font-space font-bold text-white">
               CASE #{caseData.caseNumber} — {caseData.title}
             </h1>
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30 font-bold uppercase">
+              SIH 2026 Prototype Docket
+            </span>
+          </div>
+          <div className="flex items-center gap-2 mb-2 text-xs font-mono">
+            <span className="text-gray-400">PRIMARY SUBJECT:</span>
+            <Link href="/persons/P-1042" className="text-amber-300 font-bold hover:underline">
+              Rahul Mehra (P-1042)
+            </Link>
+            <span className="text-gray-500">• Network Hub (7 direct links)</span>
           </div>
           <p className="text-gray-400 text-sm max-w-2xl">{caseData.description}</p>
         </div>

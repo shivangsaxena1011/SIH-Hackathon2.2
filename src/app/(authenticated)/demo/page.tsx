@@ -3,9 +3,11 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { 
-  Play, ArrowRight, CheckCircle2, Shield, Sparkles, 
-  FileText, Network, GitMerge, Calendar, MapPin, Brain, ShieldCheck, ScrollText, RotateCcw
+  Play, ArrowRight, CheckCircle2, Shield, 
+  FileText, Network, Clock, Brain, ScrollText, RotateCcw,
+  SlidersHorizontal, Users, FileKey
 } from 'lucide-react';
+import { getNodeDegree } from '@/lib/graph/graph-service';
 
 interface DemoStep {
   step: number;
@@ -22,146 +24,88 @@ export default function DemoPage() {
   const [activeStep, setActiveStep] = useState(0);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
 
+  const rahulDegree = getNodeDegree('P-1042');
+
   const demoSteps: DemoStep[] = [
     {
       step: 1,
-      title: 'Open Primary Investigation',
+      title: 'Stage 1 — Investigation Docket',
       subtitle: 'Case #2026-041 (Operation Trishul)',
-      desc: 'Review the active narcotics docket, high priority classification, and 12 linked entities.',
+      desc: 'Authorized investigator opens the central narcotics & document fraud docket. Displays lead officer, priority score (82/100), and correlated entities.',
       link: '/cases/C-001',
       icon: <Shield className="w-5 h-5 text-purple-400" />,
       actionText: 'Open Case #2026-041 File',
-      keyObservation: 'Notice the 12 linked entities, 7 direct relationships, and the high-priority review status.'
+      keyObservation: 'High Priority classification with 12 entities and 30 network relationships. Note explicit prototype disclaimer: Priority ≠ Guilt.'
     },
     {
       step: 2,
-      title: 'Inspect Suspect Identity Document',
+      title: 'Stage 2 — Suspicious Document Screening',
       subtitle: 'Document DOC-2026-041-009',
-      desc: 'Open the evidentiary identity card submitted under Operation Trishul.',
+      desc: 'Examine evidentiary ID card submitted under Operation Trishul. OCR text extraction (96% accuracy) paired with multi-modal forensic pre-screening.',
       link: '/documents/D-001',
-      icon: <FileText className="w-5 h-5 text-purple-400" />,
+      icon: <FileText className="w-5 h-5 text-amber-400" />,
       actionText: 'Open Document DOC-2026-041-009',
-      keyObservation: 'Inspect the document metadata, cryptographic SHA-256 hash, and file size.'
+      keyObservation: 'OCR extracts identity fields (Rahul Mehra), but forensic pre-screen flags photo region manipulation (Score: 74% / SUSPICIOUS). Marked as synthetic demonstration data.'
     },
     {
       step: 3,
-      title: 'Run Document OCR & Forensics',
-      subtitle: 'Multi-Modal Forensic Pre-Screening',
-      desc: 'Simulate document OCR extraction, MRZ decoding, and visual integrity verification.',
-      link: '/documents/D-001',
-      icon: <Sparkles className="w-5 h-5 text-amber-400" />,
-      actionText: 'Review Forensic Signals',
-      keyObservation: 'OCR passes at 96%, but visual integrity flags photo region manipulation (Score: 74% / SUSPICIOUS).'
+      title: 'Stage 3 — Entity Resolution & Match Scoring',
+      subtitle: 'Candidate Match: Rahul Mehra (P-1042)',
+      desc: 'Deterministic entity resolution engine correlates extracted document fields against registry records with transparent match breakdown.',
+      link: '/persons/P-1042',
+      icon: <Users className="w-5 h-5 text-purple-400" />,
+      actionText: 'Inspect Entity Profile (P-1042)',
+      keyObservation: 'Resolved with 94% Match Confidence. Displayed strictly as an AI-generated investigation lead for authorized human review, not a declaration of guilt.'
     },
     {
       step: 4,
-      title: 'Resolve Identity & Match Signals',
-      subtitle: 'Candidate Scoring & Linking',
-      desc: 'Correlate extracted document fields against synthetic records with explicit disclaimers.',
-      link: '/documents/D-001',
-      icon: <CheckCircle2 className="w-5 h-5 text-green-400" />,
-      actionText: 'Confirm Entity Resolution',
-      keyObservation: 'Rahul Mehra matches at 94% confidence. Clicking RESOLVE ENTITY links the document directly into the knowledge graph.'
+      title: 'Stage 4 — Multi-Source Evidence Correlation',
+      subtitle: 'Cryptographic SHA-256 Vault',
+      desc: 'Multi-source evidence fusion linking documents, surveillance records, vehicle sightings, and forensic exhibits with cryptographic hashing.',
+      link: '/evidence',
+      icon: <FileKey className="w-5 h-5 text-emerald-400" />,
+      actionText: 'Open Evidence Vault',
+      keyObservation: 'Every item is cryptographically anchored with SHA-256 hashes. Live 1-byte tamper detection simulation proves non-repudiation.'
     },
     {
       step: 5,
-      title: 'Explore Knowledge Graph',
-      subtitle: 'Criminal Intelligence Network & Hubs',
-      desc: 'Visualize entity relationships in the interactive React Flow knowledge graph.',
+      title: 'Stage 5 — Criminal Network Knowledge Graph',
+      subtitle: 'Hub Detection & Multi-Hop Path Finder',
+      desc: 'Interactive React Flow knowledge graph visualizing multi-entity relationships across persons, vehicles, cases, and locations.',
       link: '/network',
-      icon: <Network className="w-5 h-5 text-purple-400" />,
-      actionText: 'Open Knowledge Graph',
-      keyObservation: 'Rahul Mehra appears as the central network hub (canonical degree 7) connected to Vehicle MP09-DEMO-4821 and associate Arjun Verma.'
+      icon: <Network className="w-5 h-5 text-blue-400" />,
+      actionText: 'Launch Knowledge Graph',
+      keyObservation: `Rahul Mehra stands out as central network hub with canonical degree ${rahulDegree}. Path Finder reveals 2-hop conduit to associate Harsh Pandey via Vehicle MP09-DEMO-4821.`
     },
     {
       step: 6,
-      title: 'Trace Multi-Hop Connection',
-      subtitle: 'Investigation Path Finder',
-      desc: 'Run shortest-path graph traversal between Rahul Mehra (P-1042) and Harsh Pandey (P-1412).',
+      title: 'Stage 6 — Chronological Replay & Geospatial Map',
+      subtitle: 'Transit Movements & ANPR Surveillance',
+      desc: 'Synchronized chronological stepper and geospatial map tracking vehicle and subject movements across transit checkpoints.',
       link: '/cases/C-001/workspace',
-      icon: <GitMerge className="w-5 h-5 text-indigo-400" />,
-      actionText: 'Launch Path Finder in Workspace',
-      keyObservation: 'Discovers a 2-hop conduit through Vehicle MP09-DEMO-4821 with provenance breakdown (RECORDED vs INFERRED).'
+      icon: <Clock className="w-5 h-5 text-cyan-400" />,
+      actionText: 'Launch Investigation Replay & Map',
+      keyObservation: 'Timeline reconstructs sequential events between 09:40 and 12:10; map links camera ANPR captures to physical checkpoints with confidence ratings.'
     },
     {
       step: 7,
-      title: 'Detect Network Clusters',
-      subtitle: 'Operational Syndicate Cell Partitioning',
-      desc: 'Partition the criminal network into 3 distinct operational cells and identify bridge conduits.',
-      link: '/query',
-      icon: <Network className="w-5 h-5 text-cyan-400" />,
-      actionText: 'Inspect Clusters & Query Builder',
-      keyObservation: 'Reveals Trishul Core (Purple), Transit Logistics (Cyan), and Document Laundering (Amber) syndicates.'
+      title: 'Stage 7 — Explainable AI Lead & Why-Chain',
+      subtitle: 'Transparent Reasoning & Non-Guilt Principle',
+      desc: 'Deterministic rule-based AI reasoning surfaces high-priority investigative leads with full auditability and provenance.',
+      link: '/insights',
+      icon: <Brain className="w-5 h-5 text-pink-400" />,
+      actionText: 'Inspect AI Evidence Chains',
+      keyObservation: "Clicking 'Why This Insight?' displays step-by-step evidence provenance. Mandatory safety principle: PRIORITY ≠ GUILT."
     },
     {
       step: 8,
-      title: 'Highlight Cross-Case Connections',
-      subtitle: 'Multi-Docket Overlap Matrix',
-      desc: 'Examine connections linking Case #2026-041, Case #2026-017, and Case #2025-089.',
-      link: '/cross-case',
-      icon: <GitMerge className="w-5 h-5 text-pink-400" />,
-      actionText: 'View Cross-Case Matrix',
-      keyObservation: '2 high-value cross-case connections revealed: same subject and vehicle appear across separate investigations.'
-    },
-    {
-      step: 9,
-      title: 'Reconstruct Timeline & Replay',
-      subtitle: 'Synchronized Chronological Incident Stepper',
-      desc: 'Play through sequential surveillance and ANPR captures across Bhopal transit checkpoints.',
-      link: '/cases/C-001/workspace',
-      icon: <Calendar className="w-5 h-5 text-cyan-400" />,
-      actionText: 'Run Investigation Replay',
-      keyObservation: 'Interactive scrubber synchronizes incident playback from 09:40 to 12:10 with map coordinates.'
-    },
-    {
-      step: 10,
-      title: 'Inspect Geospatial Intelligence Map',
-      subtitle: 'Synthetic Surveillance Coordinates',
-      desc: 'Trace movement routes on the interactive vector intelligence map.',
-      link: '/map',
-      icon: <MapPin className="w-5 h-5 text-red-400" />,
-      actionText: 'Launch Vector Intelligence Map',
-      keyObservation: 'Click camera cluster and ANPR checkpoint markers to view associated timestamps and confidence ratings.'
-    },
-    {
-      step: 11,
-      title: 'Review Explainable AI Insights',
-      subtitle: 'Multi-Hop "Why This Insight?" Evidence Chain',
-      desc: 'Inspect deterministic rule-based insights with step-by-step reasoning chains.',
-      link: '/insights',
-      icon: <Brain className="w-5 h-5 text-purple-400" />,
-      actionText: 'Open AI Evidence Chains',
-      keyObservation: 'Click "WHY THIS INSIGHT?" to see the 4-step evidential provenance and notice that "Priority ≠ Guilt".'
-    },
-    {
-      step: 12,
-      title: 'Generate Executive Investigation Brief',
-      subtitle: 'Printable Dossier & Markdown Export',
-      desc: 'Generate a structured command-level brief with Priority Index (82/100) and Section 65B notices.',
-      link: '/cases/C-001/workspace',
-      icon: <FileText className="w-5 h-5 text-emerald-400" />,
-      actionText: 'Open Investigation Dossier',
-      keyObservation: 'Full executive dossier with 1-click Markdown download and browser print preview.'
-    },
-    {
-      step: 13,
-      title: 'Cryptographic Evidence & Security',
-      subtitle: 'SHA-256 Integrity Verification',
-      desc: 'Verify cryptographic hashes and test live tamper detection in the Security Center.',
-      link: '/evidence',
-      icon: <ShieldCheck className="w-5 h-5 text-emerald-400" />,
-      actionText: 'Verify Evidence & Security Center',
-      keyObservation: 'Confirm tamper-evident SHA-256 hash match on EV-2026-041-001 and run the interactive 1-byte tamper simulation.'
-    },
-    {
-      step: 14,
-      title: 'Tamper-Evident Audit Ledger',
-      subtitle: 'Oversight & Accountability Ledger',
-      desc: 'Review the tamper-evident ledger recording all officer sessions, case views, and entity resolutions.',
+      title: 'Stage 8 — Prototype Security & Runtime Audit',
+      subtitle: 'Append-Only Runtime Audit & Zero-Trust Posture',
+      desc: 'Accountability framework verifying server-enforced RBAC, HMAC-signed sessions, and append-only runtime audit logging.',
       link: '/audit',
-      icon: <ScrollText className="w-5 h-5 text-blue-400" />,
-      actionText: 'Open System Audit Ledger',
-      keyObservation: 'Every action taken during this demo—from login to document resolution to access denial—is permanently recorded.'
+      icon: <ScrollText className="w-5 h-5 text-indigo-400" />,
+      actionText: 'Inspect Runtime Audit Ledger',
+      keyObservation: 'Every login, document resolution, and case query is logged in an append-only runtime ledger. Note: In production, persistent WORM storage is deployed.'
     },
   ];
 
@@ -180,39 +124,45 @@ export default function DemoPage() {
   return (
     <div className="p-6 max-w-5xl mx-auto space-y-8">
       {/* Header */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-gray-800 pb-6">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-purple-500/20 pb-6">
         <div>
-          <div className="flex items-center gap-3">
-            <h1 className="text-3xl font-bold font-space text-white">SIH INVESTIGATION DEMO</h1>
-            <span className="text-xs bg-purple-500/20 text-purple-400 border border-purple-500/30 px-2.5 py-1 rounded-full font-mono font-bold">
-              JUDGE WALKTHROUGH
+          <div className="flex items-center gap-3 flex-wrap">
+            <h1 className="text-2xl md:text-3xl font-bold font-space text-white flex items-center gap-2">
+              <Play className="w-6 h-6 text-purple-400 fill-purple-400" />
+              SIH 2026 INVESTIGATION DEMO
+            </h1>
+            <span className="text-xs bg-purple-500/20 text-purple-300 border border-purple-500/30 px-3 py-1 rounded-full font-mono font-bold">
+              8-STAGE JUDGE WALKTHROUGH
+            </span>
+            <span className="text-xs bg-pink-500/10 text-pink-300 border border-pink-500/20 px-2.5 py-1 rounded-full font-mono">
+              SYNTHETIC DEMO DATA
             </span>
           </div>
-          <p className="text-gray-400 mt-2 text-sm max-w-2xl">
-            This guided sequence walks judges through the complete end-to-end investigation story:
-            <span className="text-purple-300 font-medium"> Case → Document → Forensics → Entity Resolution → Knowledge Graph → Cross-Case → Timeline → Map → AI Insight → Evidence → Audit.</span>
+          <p className="text-gray-400 mt-2 text-xs sm:text-sm max-w-2xl font-mono">
+            Structured live demonstration flow:
+            <span className="text-purple-300 font-semibold"> Case → Document → Identity → Evidence → Network → Timeline/Map → AI Intelligence → Security/Audit.</span>
           </p>
         </div>
         <div className="flex items-center gap-3 shrink-0">
           <button
             onClick={handleResetDemo}
-            className="px-3 py-2 bg-gray-800 hover:bg-gray-700 text-xs text-gray-300 rounded-lg border border-gray-700 transition flex items-center gap-1.5"
+            className="px-3 py-2 bg-gray-800 hover:bg-gray-700 text-xs text-gray-300 rounded-lg border border-gray-700 transition flex items-center gap-1.5 font-mono"
           >
             <RotateCcw className="w-3.5 h-3.5" /> Restart Tour
           </button>
-          <div className="text-right bg-[#1A0F2E] border border-gray-800 px-4 py-2 rounded-xl">
-            <div className="text-[10px] text-gray-500 uppercase font-mono">Progress</div>
-            <div className="text-base font-bold text-purple-400 font-mono">
-              {completedSteps.length} / {demoSteps.length} Steps Completed
+          <div className="text-right bg-[#1A0F2E] border border-purple-500/30 px-4 py-2 rounded-xl">
+            <div className="text-[10px] text-gray-400 uppercase font-mono">Completed</div>
+            <div className="text-base font-bold text-purple-300 font-mono">
+              {completedSteps.length} / {demoSteps.length} Stages
             </div>
           </div>
         </div>
       </div>
 
       {/* Progress Bar */}
-      <div className="w-full bg-gray-800/80 h-2 rounded-full overflow-hidden border border-gray-700">
+      <div className="w-full bg-gray-900 h-2.5 rounded-full overflow-hidden border border-purple-500/30">
         <div 
-          className="bg-gradient-to-r from-purple-500 to-pink-500 h-full transition-all duration-300"
+          className="bg-gradient-to-r from-purple-500 via-indigo-500 to-pink-500 h-full transition-all duration-300"
           style={{ width: `${(completedSteps.length / demoSteps.length) * 100}%` }}
         />
       </div>
@@ -228,9 +178,9 @@ export default function DemoPage() {
               key={step.step}
               className={`p-5 rounded-xl border transition-all ${
                 isActive
-                  ? 'bg-[#1A0F2E] border-purple-500 shadow-lg shadow-purple-500/10 ring-1 ring-purple-500/30'
+                  ? 'bg-[#1A0F2E] border-purple-500 shadow-xl shadow-purple-500/10 ring-1 ring-purple-500/40'
                   : isDone
-                    ? 'bg-[#1A0F2E]/40 border-gray-800/80'
+                    ? 'bg-[#1A0F2E]/60 border-purple-500/20'
                     : 'bg-[#1A0F2E]/20 border-gray-800/40 opacity-70'
               }`}
             >
@@ -251,49 +201,65 @@ export default function DemoPage() {
                 </div>
 
                 {/* Body */}
-                <div className="flex-1 space-y-2">
+                <div className="flex-1 space-y-2.5">
                   <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1">
                     <div>
                       <h3 className={`text-base font-bold font-space flex items-center gap-2 ${isActive ? 'text-white' : 'text-gray-300'}`}>
                         {step.title}
-                        <span className="text-xs font-mono font-normal text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded border border-purple-500/20">
+                        <span className="text-xs font-mono font-normal text-purple-300 bg-purple-500/15 px-2 py-0.5 rounded border border-purple-500/30">
                           {step.subtitle}
                         </span>
                       </h3>
                     </div>
                     {isDone && (
-                      <span className="text-xs text-green-400 font-medium flex items-center gap-1">
-                        <CheckCircle2 className="w-3.5 h-3.5" /> Completed
+                      <span className="text-xs text-green-400 font-medium flex items-center gap-1 font-mono">
+                        <CheckCircle2 className="w-3.5 h-3.5" /> Stage Completed
                       </span>
                     )}
                   </div>
 
-                  <p className="text-xs text-gray-400">{step.desc}</p>
+                  <p className="text-xs text-gray-300 leading-relaxed">{step.desc}</p>
 
                   {/* Key Observation */}
-                  <div className="p-3 bg-black/40 rounded-lg border border-gray-800 text-xs text-gray-300">
-                    <span className="text-purple-400 font-semibold">Judge Observation: </span>
+                  <div className="p-3 bg-black/50 rounded-lg border border-purple-500/20 text-xs text-gray-300">
+                    <span className="text-purple-400 font-semibold font-mono">Judge Demonstration Note: </span>
                     {step.keyObservation}
                   </div>
 
-                  {/* Action Buttons */}
-                  {isActive && (
-                    <div className="pt-2 flex flex-wrap gap-3">
-                      <Link
-                        href={step.link}
-                        onClick={() => handleCompleteStep(idx)}
-                        className="px-5 py-2 bg-purple-600 hover:bg-purple-500 text-white text-xs font-medium rounded-lg transition flex items-center gap-2 shadow-md shadow-purple-600/20"
-                      >
-                        {step.actionText} <ArrowRight className="w-3.5 h-3.5" />
-                      </Link>
+                  {/* Action Controls */}
+                  <div className="pt-2 flex flex-wrap items-center gap-2.5">
+                    <Link
+                      href={step.link}
+                      onClick={() => handleCompleteStep(idx)}
+                      className="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold rounded-lg transition flex items-center gap-1.5 shadow-md shadow-purple-600/25"
+                    >
+                      {step.actionText} <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+
+                    {isActive && (
                       <button
                         onClick={() => handleCompleteStep(idx)}
-                        className="px-4 py-2 bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs font-medium rounded-lg border border-gray-700 transition"
+                        className="px-4 py-2 bg-gray-800 hover:bg-gray-700 text-gray-200 text-xs font-medium rounded-lg border border-gray-700 transition font-mono"
                       >
                         Next Step &rarr;
                       </button>
-                    </div>
-                  )}
+                    )}
+
+                    <Link
+                      href="/cases/C-001/workspace"
+                      className="px-3.5 py-2 bg-[#0B0716] hover:bg-white/5 text-purple-300 text-xs font-medium rounded-lg border border-purple-500/30 transition flex items-center gap-1.5 font-mono"
+                    >
+                      <SlidersHorizontal className="w-3 h-3 text-purple-400" />
+                      View in Workspace
+                    </Link>
+
+                    <Link
+                      href="/cases/C-001"
+                      className="px-3.5 py-2 bg-[#0B0716] hover:bg-white/5 text-gray-400 hover:text-white text-xs font-medium rounded-lg border border-gray-800 transition font-mono"
+                    >
+                      Back to Case
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>

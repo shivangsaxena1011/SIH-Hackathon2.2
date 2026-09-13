@@ -25,7 +25,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { findCanonicalCase, getCanonicalCaseId } from '@/lib/cases/case-service';
 import { calculateInvestigationPriorityScore } from '@/lib/ai/priority-score';
-import { getCaseGraph } from '@/lib/graph/graph-service';
+import { getCaseGraph, getNodeDegree } from '@/lib/graph/graph-service';
 import { seedEvents, seedLocations, seedInsights, seedCases } from '@/data/seed';
 import { NetworkGraph } from '@/components/graph/NetworkGraph';
 import { IntelligenceMap } from '@/components/map/IntelligenceMap';
@@ -123,7 +123,7 @@ export default function CaseWorkspacePage({
       {/* Workspace Top Command Bar */}
       <div className="border-b border-purple-500/20 bg-[#130B24]/90 backdrop-blur-md sticky top-0 z-30 px-4 sm:px-6 py-3 shadow-xl">
         <div className="flex flex-wrap items-center justify-between gap-4">
-          {/* Left: Case Info */}
+          {/* Left: Case Info & Primary Subject */}
           <div className="flex items-center space-x-3">
             <Link
               href={`/cases/${c.id}`}
@@ -133,20 +133,26 @@ export default function CaseWorkspacePage({
               <ArrowLeft className="w-4 h-4" />
             </Link>
             <div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 flex-wrap">
                 <span className="text-xs font-mono font-bold text-purple-400">
                   CASE #{c.caseNumber}
                 </span>
-                <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-purple-950 text-purple-300 border border-purple-500/30">
-                  {c.status}
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-500/30 font-bold">
+                  {c.title.toUpperCase()}
                 </span>
-                <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-rose-950 text-rose-300 border border-rose-500/30">
-                  {c.priority}
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-rose-950 text-rose-300 border border-rose-500/30 font-bold">
+                  ACTIVE INVESTIGATION
                 </span>
               </div>
-              <h1 className="text-base sm:text-lg font-space font-bold text-white leading-tight">
-                {c.title} — Unified Investigation Workspace
-              </h1>
+              <div className="flex items-center gap-2 mt-1 flex-wrap">
+                <span className="text-[11px] font-mono text-gray-400">PRIMARY SUBJECT:</span>
+                <Link href="/persons/P-1042" className="text-xs font-mono font-bold text-amber-300 hover:text-amber-200 underline">
+                  Rahul Mehra (P-1042)
+                </Link>
+                <span className="text-[10px] text-gray-400 font-mono">
+                  • Network Hub ({getNodeDegree('P-1042')} Direct Correlated Links)
+                </span>
+              </div>
             </div>
           </div>
 
@@ -171,19 +177,31 @@ export default function CaseWorkspacePage({
             </div>
           </div>
 
-          {/* Right: Quick Action Buttons */}
-          <div className="flex items-center space-x-2">
+          {/* Right: Functional Action Buttons */}
+          <div className="flex flex-wrap items-center gap-2">
             <button
               onClick={() => setIsPathFinderOpen(true)}
-              className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-semibold flex items-center gap-1.5 shadow-md transition-all"
+              className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-semibold flex items-center gap-1.5 shadow-md transition-all font-mono"
             >
               <GitMerge className="w-3.5 h-3.5" /> FIND CONNECTION
             </button>
+            <Link
+              href={`/evidence?caseId=${c.id}`}
+              className="px-3 py-1.5 rounded-lg bg-[#1A0F2E] hover:bg-purple-950/80 text-emerald-300 border border-emerald-500/40 text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-sm font-mono"
+            >
+              <FileText className="w-3.5 h-3.5 text-emerald-400" /> VIEW EVIDENCE
+            </Link>
             <button
               onClick={() => setIsBriefOpen(true)}
-              className="px-3 py-1.5 rounded-lg bg-purple-950/70 hover:bg-purple-900/80 text-purple-200 border border-purple-500/40 text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-sm"
+              className="px-3 py-1.5 rounded-lg bg-purple-950/70 hover:bg-purple-900/80 text-purple-200 border border-purple-500/40 text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-sm font-mono"
             >
-              <FileText className="w-3.5 h-3.5" /> EXECUTIVE BRIEF
+              <FileText className="w-3.5 h-3.5" /> GENERATE BRIEF
+            </button>
+            <button
+              onClick={() => setActiveTab('TIMELINE')}
+              className="px-3 py-1.5 rounded-lg bg-[#1A0F2E] hover:bg-white/10 text-cyan-300 border border-cyan-500/40 text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-sm font-mono"
+            >
+              <Clock className="w-3.5 h-3.5 text-cyan-400" /> REPLAY INVESTIGATION
             </button>
           </div>
         </div>
@@ -240,7 +258,7 @@ export default function CaseWorkspacePage({
                 <span>•</span>
                 <span>CORRELATED EDGES: <strong className="text-white">{graphData.edges.length}</strong></span>
                 <span>•</span>
-                <span className="text-purple-300">HUB: Rahul Mehra (P-1042 • 7 direct links)</span>
+                <span className="text-purple-300">HUB: Rahul Mehra (P-1042 • {getNodeDegree('P-1042')} direct links)</span>
               </div>
               <button
                 onClick={() => setIsPathFinderOpen(true)}

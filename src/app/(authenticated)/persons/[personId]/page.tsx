@@ -70,7 +70,7 @@ export default function PersonProfilePage() {
            )}
         </div>
         <div className="flex-1">
-          <div className="flex items-center space-x-3 mb-2">
+          <div className="flex items-center space-x-3 mb-2 flex-wrap">
             <h1 className="text-3xl font-bold font-space text-white">{person.name}</h1>
             <span className={`px-2.5 py-0.5 rounded text-xs font-semibold border ${
                 person.riskLevel === 'HIGH' || person.riskLevel === 'CRITICAL' ? 'bg-red-500/10 text-red-400 border-red-500/20' :
@@ -79,17 +79,23 @@ export default function PersonProfilePage() {
             }`}>
                 {person.status ? person.status.replace('_', ' ') : 'UNDER REVIEW'}
             </span>
+            <span className="text-[10px] font-mono font-bold text-purple-300 bg-purple-500/15 border border-purple-500/30 px-2 py-0.5 rounded uppercase">
+              Investigation Lead • Priority ≠ Guilt
+            </span>
           </div>
-          <div className="flex items-center space-x-4 text-sm text-gray-400">
+          <div className="flex items-center space-x-4 text-sm text-gray-400 flex-wrap gap-y-2">
             <span className="font-mono bg-gray-900 px-2 py-1 rounded border border-gray-800">{person.id}</span>
-            <span className="flex items-center">
-              <Activity className="w-4 h-4 mr-1 text-pink-400" /> Priority: {person.riskLevel}
+            <span className="flex items-center text-xs font-mono">
+              <Activity className="w-3.5 h-3.5 mr-1 text-pink-400" /> Review Priority: {person.riskLevel}
+            </span>
+            <span className="text-xs font-mono text-purple-300 bg-purple-900/30 border border-purple-500/20 px-2 py-0.5 rounded">
+              Correlated Degree: {relationships.length} links
             </span>
           </div>
           {person.aliases && person.aliases.length > 0 && (
-            <div className="mt-3 flex items-center space-x-2 text-sm">
-                <span className="text-gray-500">Aliases:</span>
-                {person.aliases.map((a, i) => <span key={i} className="text-gray-300 bg-gray-800 px-2 py-0.5 rounded text-xs">{a}</span>)}
+            <div className="mt-3 flex items-center space-x-2 text-sm flex-wrap gap-1">
+                <span className="text-gray-500 text-xs">Known Aliases:</span>
+                {person.aliases.map((a, i) => <span key={i} className="text-gray-300 bg-gray-800 px-2 py-0.5 rounded text-xs font-mono">{a}</span>)}
             </div>
           )}
         </div>
