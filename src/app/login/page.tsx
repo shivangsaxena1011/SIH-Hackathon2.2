@@ -180,9 +180,13 @@ export default function LoginPage() {
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.4 }}
-            className="inline-flex items-center justify-center p-3.5 bg-purple-500/10 rounded-2xl border border-purple-500/30 mb-4 shadow-[0_0_35px_rgba(168,85,247,0.2)]"
+            className="inline-flex items-center justify-center mb-3 shadow-[0_0_35px_rgba(168,85,247,0.25)]"
           >
-            <ShieldCheck size={42} className="text-purple-400" />
+            <img 
+              src="/trishul-logo.jpg" 
+              alt="TRISHUL Logo" 
+              className="w-20 h-20 rounded-2xl object-cover border-2 border-purple-500/40 bg-black" 
+            />
           </motion.div>
           <motion.h1
             initial={{ y: 15, opacity: 0 }}

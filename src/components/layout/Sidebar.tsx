@@ -152,8 +152,8 @@ export default function Sidebar({ userRole }: SidebarProps) {
       <div className="flex items-center justify-between h-16 px-4 border-b border-purple-500/20">
         {!isCollapsed ? (
           <Link href="/dashboard" className="flex items-center space-x-2.5 overflow-hidden">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-600 via-indigo-600 to-pink-600 flex items-center justify-center shrink-0 shadow-md shadow-purple-600/30">
-              <ShieldCheck className="text-white shrink-0" size={18} />
+            <div className="w-8 h-8 rounded-lg overflow-hidden border border-purple-500/40 shrink-0 shadow-md shadow-purple-600/30 bg-black">
+              <img src="/trishul-logo.jpg" alt="TRISHUL" className="w-full h-full object-cover" />
             </div>
             <div>
               <span className="font-space font-bold text-white tracking-wider block text-sm leading-tight">
@@ -166,8 +166,8 @@ export default function Sidebar({ userRole }: SidebarProps) {
           </Link>
         ) : (
           <Link href="/dashboard" className="flex justify-center w-full">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-600 via-indigo-600 to-pink-600 flex items-center justify-center shrink-0">
-              <ShieldCheck className="text-white shrink-0" size={18} />
+            <div className="w-8 h-8 rounded-lg overflow-hidden border border-purple-500/40 shrink-0 shadow-md shadow-purple-600/30 bg-black">
+              <img src="/trishul-logo.jpg" alt="TRISHUL" className="w-full h-full object-cover" />
             </div>
           </Link>
         )}

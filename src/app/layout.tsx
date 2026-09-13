@@ -3,8 +3,11 @@ import "./globals.css";
 import { AppProviders } from "@/components/providers/AppProviders";
 
 export const metadata: Metadata = {
-  title: "SIH Intelligence Platform — AI-Powered Criminal Network Analysis",
-  description: "Secure Criminal Intelligence Command Center — SIH 2026 Prototype. All data is synthetic for demonstration purposes.",
+  title: "TRISHUL — AI-Powered Criminal Network Analysis System (PS189)",
+  description: "TRISHUL: Secure Criminal Intelligence Command Console — SIH 2026 Functional Prototype. Synthetic demonstration data for authorized investigation workflow.",
+  icons: {
+    icon: "/trishul-logo.jpg",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

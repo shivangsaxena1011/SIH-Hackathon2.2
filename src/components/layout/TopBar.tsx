@@ -176,9 +176,10 @@ export default function TopBar({ user: initialUser }: TopBarProps) {
 
         {/* Prototype Indicators */}
         <div className="hidden xl:flex items-center gap-2">
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] font-mono font-bold bg-purple-500/15 text-purple-300 border border-purple-500/30">
-            SIH 2026 • FUNCTIONAL PROTOTYPE
-          </span>
+          <div className="flex items-center gap-2 px-2.5 py-1 rounded-md text-[10px] font-mono font-bold bg-purple-500/15 text-purple-300 border border-purple-500/30">
+            <img src="/trishul-logo.jpg" alt="TRISHUL" className="w-4 h-4 rounded-full object-cover" />
+            <span>SIH 2026 • FUNCTIONAL PROTOTYPE</span>
+          </div>
           <span className="hidden 2xl:inline-flex items-center gap-1 px-2 py-1 rounded-md text-[10px] font-mono text-pink-300 bg-pink-500/10 border border-pink-500/25">
             SYNTHETIC DATA
           </span>

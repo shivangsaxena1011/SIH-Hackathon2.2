@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ShieldCheck, Share2, FileText, Clock, MapPin, Brain, ShieldAlert, ArrowRight } from 'lucide-react';
+import { Share2, FileText, Clock, MapPin, Brain, ShieldAlert, ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export default function LandingPage() {
@@ -12,8 +12,10 @@ export default function LandingPage() {
       {/* Navbar */}
       <nav className="fixed top-0 w-full border-b border-white/5 bg-[#0B0716]/80 backdrop-blur-md z-50">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <ShieldCheck className="text-purple-500" size={28} />
+          <div className="flex items-center space-x-2.5">
+            <div className="w-9 h-9 rounded-lg overflow-hidden border border-purple-500/40 shadow-md bg-black">
+              <img src="/trishul-logo.jpg" alt="TRISHUL" className="w-full h-full object-cover" />
+            </div>
             <span className="font-space-grotesk font-bold text-white tracking-widest text-xl">TRISHUL</span>
             <span className="text-[10px] font-mono text-purple-400 bg-purple-500/10 border border-purple-500/20 px-2 py-0.5 rounded">SIH 2026</span>
           </div>
@@ -32,7 +34,7 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero Section */}
-      <main className="relative pt-32 pb-20 lg:pt-48 lg:pb-32">
+      <main className="relative pt-32 pb-20 lg:pt-44 lg:pb-32">
         {/* Background Gradients */}
         <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-purple-600/20 rounded-full blur-[120px] pointer-events-none"></div>
         <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-blue-600/20 rounded-full blur-[100px] pointer-events-none"></div>
@@ -43,6 +45,11 @@ export default function LandingPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
+            <div className="flex justify-center mb-4">
+              <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-purple-500/40 shadow-[0_0_35px_rgba(168,85,247,0.35)] bg-black">
+                <img src="/trishul-logo.jpg" alt="TRISHUL Emblem" className="w-full h-full object-cover" />
+              </div>
+            </div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-mono font-bold mb-6">
               SMART INDIA HACKATHON 2026 • PS189 FUNCTIONAL PROTOTYPE
             </div>
