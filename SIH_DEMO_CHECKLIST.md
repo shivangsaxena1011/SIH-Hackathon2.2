@@ -43,7 +43,7 @@
 | **3:30** | **10. Timeline Replay & Map** | `/timeline` & `/map` | Use Timeline Replay Controller to playback chronological sequence from 09:40 to 12:10 on zero-dependency SVG vector map. |
 | **3:50** | **11. Explainable AI Insights** | `/insights` | Open Insight #001. Click **"Why This Insight?"** to inspect multi-hop evidence chain and cited cryptographic evidence hashes. |
 | **4:10** | **12. Priority Scoring** | `/cases/C-001/workspace` | Review Explainable Priority Score (82/100, Critical Review) with mandatory `PRIORITY ≠ GUILT` human-in-the-loop disclaimer. |
-| **4:25** | **13. Section 65B Legal Brief** | `/cases/C-001/workspace` | Click **"GENERATE BRIEF"**. Produce print-ready Executive Investigation Brief compliant with Section 65B of the Indian Evidence Act. |
+| **4:25** | **13. Section 65B-Oriented Brief** | `/cases/C-001/workspace` | Click **"GENERATE BRIEF"**. Produce 65B-oriented electronic evidence dossier structured for Section 65B evidential considerations (Prototype demonstration). |
 | **4:45** | **14. Append-Only Audit Ledger** | `/security` & `/audit` | Verify SHA-256 evidence integrity, run 1-byte tamper simulation, and inspect append-only runtime audit ledger recording every officer action. |
 
 ---

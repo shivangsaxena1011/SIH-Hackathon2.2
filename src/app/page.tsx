@@ -84,7 +84,7 @@ export default function LandingPage() {
                 href="/demo"
                 className="inline-flex items-center space-x-2 px-6 py-4 bg-[#1A0F2E] hover:bg-white/10 text-gray-200 font-semibold rounded-xl text-lg border border-purple-500/30 transition-all"
               >
-                <span>Guided Presentation (11 Steps)</span>
+                <span>Guided Judge Tour (8 Stages)</span>
               </Link>
             </div>
           </motion.div>
@@ -143,7 +143,7 @@ export default function LandingPage() {
             <FeatureCard 
               icon={ShieldAlert} 
               title="Security & Audit" 
-              description="Strict Role-Based Access Control (RBAC) with tamper-evident audit logging ensuring compliance and data integrity."
+              description="Strict Role-Based Access Control (RBAC) with append-only runtime audit logging tracking authorized investigative actions."
               color="text-red-400"
               bgColor="bg-red-500/10"
               borderColor="border-red-500/20"

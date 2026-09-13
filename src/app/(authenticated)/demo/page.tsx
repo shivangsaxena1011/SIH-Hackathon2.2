@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { 
-  Play, ArrowRight, CheckCircle2, Shield, 
+  Play, CheckCircle2, Shield, 
   FileText, Network, Clock, Brain, ScrollText, RotateCcw,
   SlidersHorizontal, Users, FileKey
 } from 'lucide-react';
@@ -11,13 +11,15 @@ import { getNodeDegree } from '@/lib/graph/graph-service';
 
 interface DemoStep {
   step: number;
+  stageName: string;
   title: string;
   subtitle: string;
-  desc: string;
+  whatIsHappening: string;
+  whatSystemShows: string;
+  whyItMatters: string;
   link: string;
   icon: React.ReactNode;
   actionText: string;
-  keyObservation: string;
 }
 
 export default function DemoPage() {
@@ -29,83 +31,99 @@ export default function DemoPage() {
   const demoSteps: DemoStep[] = [
     {
       step: 1,
-      title: 'Stage 1 — Investigation Docket',
+      stageName: 'CASE',
+      title: 'Stage 1 — Primary Case Docket',
       subtitle: 'Case #2026-041 (Operation Trishul)',
-      desc: 'Authorized investigator opens the central narcotics & document fraud docket. Displays lead officer, priority score (82/100), and correlated entities.',
+      whatIsHappening: 'Authorized investigator opens the central multi-jurisdictional narcotics and fraud docket.',
+      whatSystemShows: 'Normalized docket file, active leads, lead officer assignment, and an explainable priority score of 82/100 (Critical Review).',
+      whyItMatters: 'Provides unified operational focus and eliminates cross-jurisdictional evidence loss while upholding the PRIORITY ≠ GUILT principle.',
       link: '/cases/C-001',
       icon: <Shield className="w-5 h-5 text-purple-400" />,
-      actionText: 'Open Case #2026-041 File',
-      keyObservation: 'High Priority classification with 12 entities and 30 network relationships. Note explicit prototype disclaimer: Priority ≠ Guilt.'
+      actionText: 'Open Case Docket File',
     },
     {
       step: 2,
-      title: 'Stage 2 — Suspicious Document Screening',
+      stageName: 'DOCUMENT',
+      title: 'Stage 2 — Evidentiary Document Screening',
       subtitle: 'Document DOC-2026-041-009',
-      desc: 'Examine evidentiary ID card submitted under Operation Trishul. OCR text extraction (96% accuracy) paired with multi-modal forensic pre-screening.',
+      whatIsHappening: 'Forensic officer inspects an evidentiary identity card submitted from transit checkpoint Alpha.',
+      whatSystemShows: 'High-precision OCR field extraction (96% accuracy) paired with edge anomaly detection (74% Suspicious / Tamper Flag).',
+      whyItMatters: 'Catches counterfeit credentials early in the pipeline before falsified identities pollute the criminal registry.',
       link: '/documents/D-001',
       icon: <FileText className="w-5 h-5 text-amber-400" />,
-      actionText: 'Open Document DOC-2026-041-009',
-      keyObservation: 'OCR extracts identity fields (Rahul Mehra), but forensic pre-screen flags photo region manipulation (Score: 74% / SUSPICIOUS). Marked as synthetic demonstration data.'
+      actionText: 'Inspect Document Forensics',
     },
     {
       step: 3,
-      title: 'Stage 3 — Entity Resolution & Match Scoring',
+      stageName: 'IDENTITY',
+      title: 'Stage 3 — Deterministic Entity Resolution',
       subtitle: 'Candidate Match: Rahul Mehra (P-1042)',
-      desc: 'Deterministic entity resolution engine correlates extracted document fields against registry records with transparent match breakdown.',
+      whatIsHappening: 'System resolves OCR demographic data against recorded persons and alias catalogs.',
+      whatSystemShows: 'Deterministic 94% match confidence linking document to suspect Rahul Mehra (Alias "Rocky") with transparent attribute breakdown.',
+      whyItMatters: 'Unifies fragmented alias profiles into an investigative lead for authorized human review rather than an automated accusation.',
       link: '/persons/P-1042',
       icon: <Users className="w-5 h-5 text-purple-400" />,
-      actionText: 'Inspect Entity Profile (P-1042)',
-      keyObservation: 'Resolved with 94% Match Confidence. Displayed strictly as an AI-generated investigation lead for authorized human review, not a declaration of guilt.'
+      actionText: 'Inspect Resolved Identity Profile',
     },
     {
       step: 4,
-      title: 'Stage 4 — Multi-Source Evidence Correlation',
-      subtitle: 'Cryptographic SHA-256 Vault',
-      desc: 'Multi-source evidence fusion linking documents, surveillance records, vehicle sightings, and forensic exhibits with cryptographic hashing.',
-      link: '/evidence',
+      stageName: 'EVIDENCE',
+      title: 'Stage 4 — Cryptographic Evidence Vault',
+      subtitle: 'Multi-Source SHA-256 Custody',
+      whatIsHappening: 'Investigator verifies authenticity of all 10 case items (documents, surveillance logs, mobile records).',
+      whatSystemShows: 'Deterministic 256-bit cryptographic SHA-256 digests with live 1-byte tamper simulation.',
+      whyItMatters: 'Guarantees strict electronic chain of custody and enables verifiable 65B-oriented electronic evidence brief generation.',
+      link: '/evidence?caseId=C-001',
       icon: <FileKey className="w-5 h-5 text-emerald-400" />,
-      actionText: 'Open Evidence Vault',
-      keyObservation: 'Every item is cryptographically anchored with SHA-256 hashes. Live 1-byte tamper detection simulation proves non-repudiation.'
+      actionText: 'Verify Evidence Integrity',
     },
     {
       step: 5,
-      title: 'Stage 5 — Criminal Network Knowledge Graph',
+      stageName: 'NETWORK',
+      title: 'Stage 5 — Criminal Knowledge Graph',
       subtitle: 'Hub Detection & Multi-Hop Path Finder',
-      desc: 'Interactive React Flow knowledge graph visualizing multi-entity relationships across persons, vehicles, cases, and locations.',
+      whatIsHappening: 'Analyst maps multi-dimensional syndicate connections across persons, vehicles, identifiers, and locations.',
+      whatSystemShows: `Rahul Mehra as primary syndicate hub (canonical degree ${rahulDegree}) and a 2-hop BFS shortest path to Harsh Pandey via vehicle MP09-DEMO-4821.`,
+      whyItMatters: 'Exposes hidden logistical conduits and syndicate clusters that remain invisible in flat dossier files.',
       link: '/network',
       icon: <Network className="w-5 h-5 text-blue-400" />,
-      actionText: 'Launch Knowledge Graph',
-      keyObservation: `Rahul Mehra stands out as central network hub with canonical degree ${rahulDegree}. Path Finder reveals 2-hop conduit to associate Harsh Pandey via Vehicle MP09-DEMO-4821.`
+      actionText: 'Launch Knowledge Graph & Path Finder',
     },
     {
       step: 6,
+      stageName: 'TIMELINE + MAP',
       title: 'Stage 6 — Chronological Replay & Geospatial Map',
-      subtitle: 'Transit Movements & ANPR Surveillance',
-      desc: 'Synchronized chronological stepper and geospatial map tracking vehicle and subject movements across transit checkpoints.',
+      subtitle: 'Corridor Reconstruction & ANPR Trail',
+      whatIsHappening: 'Investigator reconstructs suspect movements and sightings across the Bhopal-Indore transit corridor.',
+      whatSystemShows: 'Synchronized chronological playback from 09:40 to 12:10 on a zero-dependency SVG vector intelligence map.',
+      whyItMatters: 'Reconciles spatial and temporal evidence into an indisputable event sequence for operational and legal clarity.',
       link: '/cases/C-001/workspace',
       icon: <Clock className="w-5 h-5 text-cyan-400" />,
-      actionText: 'Launch Investigation Replay & Map',
-      keyObservation: 'Timeline reconstructs sequential events between 09:40 and 12:10; map links camera ANPR captures to physical checkpoints with confidence ratings.'
+      actionText: 'Launch Timeline & Map Replay',
     },
     {
       step: 7,
-      title: 'Stage 7 — Explainable AI Lead & Why-Chain',
+      stageName: 'AI INTELLIGENCE',
+      title: 'Stage 7 — Explainable AI Lead ("Why-Chain")',
       subtitle: 'Transparent Reasoning & Non-Guilt Principle',
-      desc: 'Deterministic rule-based AI reasoning surfaces high-priority investigative leads with full auditability and provenance.',
+      whatIsHappening: 'Algorithmic reasoning engine evaluates multi-source graph patterns to generate investigative leads.',
+      whatSystemShows: 'Multi-case syndicate overlap alert (87% confidence) with complete step-by-step evidence provenance and cited hash IDs.',
+      whyItMatters: 'Eliminates black-box AI risk by delivering explainable, human-in-the-loop leads where algorithmic priority never equals guilt.',
       link: '/insights',
       icon: <Brain className="w-5 h-5 text-pink-400" />,
       actionText: 'Inspect AI Evidence Chains',
-      keyObservation: "Clicking 'Why This Insight?' displays step-by-step evidence provenance. Mandatory safety principle: PRIORITY ≠ GUILT."
     },
     {
       step: 8,
+      stageName: 'SECURITY + AUDIT',
       title: 'Stage 8 — Prototype Security & Runtime Audit',
-      subtitle: 'Append-Only Runtime Audit & Zero-Trust Posture',
-      desc: 'Accountability framework verifying server-enforced RBAC, HMAC-signed sessions, and append-only runtime audit logging.',
+      subtitle: 'Append-Only Runtime Audit & HMAC Controls',
+      whatIsHappening: 'Auditor verifies that all user queries, session tokens, and access attempts follow zero-trust principles.',
+      whatSystemShows: 'Append-only runtime audit ledger capturing every query, HMAC-SHA256 session integrity, and simulated RBAC denial on Case #2026-999.',
+      whyItMatters: 'Proves robust internal accountability and prevents evidence tampering or unauthorized access throughout the inquiry.',
       link: '/audit',
       icon: <ScrollText className="w-5 h-5 text-indigo-400" />,
       actionText: 'Inspect Runtime Audit Ledger',
-      keyObservation: 'Every login, document resolution, and case query is logged in an append-only runtime ledger. Note: In production, persistent WORM storage is deployed.'
     },
   ];
 
@@ -201,7 +219,7 @@ export default function DemoPage() {
                 </div>
 
                 {/* Body */}
-                <div className="flex-1 space-y-2.5">
+                <div className="flex-1 space-y-3">
                   <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1">
                     <div>
                       <h3 className={`text-base font-bold font-space flex items-center gap-2 ${isActive ? 'text-white' : 'text-gray-300'}`}>
@@ -218,22 +236,36 @@ export default function DemoPage() {
                     )}
                   </div>
 
-                  <p className="text-xs text-gray-300 leading-relaxed">{step.desc}</p>
-
-                  {/* Key Observation */}
-                  <div className="p-3 bg-black/50 rounded-lg border border-purple-500/20 text-xs text-gray-300">
-                    <span className="text-purple-400 font-semibold font-mono">Judge Demonstration Note: </span>
-                    {step.keyObservation}
+                  {/* 3 Core Questions Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3 bg-black/40 p-3.5 rounded-xl border border-purple-500/20 text-xs">
+                    <div>
+                      <span className="text-[10px] font-mono text-purple-400 uppercase font-bold block mb-1">
+                        WHAT IS HAPPENING?
+                      </span>
+                      <p className="text-gray-300 leading-relaxed">{step.whatIsHappening}</p>
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-mono text-cyan-400 uppercase font-bold block mb-1">
+                        WHAT DOES THE SYSTEM SHOW?
+                      </span>
+                      <p className="text-gray-300 leading-relaxed">{step.whatSystemShows}</p>
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-mono text-amber-400 uppercase font-bold block mb-1">
+                        WHY DOES IT MATTER?
+                      </span>
+                      <p className="text-gray-300 leading-relaxed">{step.whyItMatters}</p>
+                    </div>
                   </div>
 
                   {/* Action Controls */}
-                  <div className="pt-2 flex flex-wrap items-center gap-2.5">
+                  <div className="pt-1 flex flex-wrap items-center gap-2.5">
                     <Link
                       href={step.link}
                       onClick={() => handleCompleteStep(idx)}
-                      className="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold rounded-lg transition flex items-center gap-1.5 shadow-md shadow-purple-600/25"
+                      className="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold rounded-lg transition flex items-center gap-1.5 shadow-md shadow-purple-600/25 font-mono"
                     >
-                      {step.actionText} <ArrowRight className="w-3.5 h-3.5" />
+                      {step.actionText} &rarr;
                     </Link>
 
                     {isActive && (

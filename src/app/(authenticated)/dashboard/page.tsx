@@ -113,14 +113,14 @@ export default function DashboardPage() {
       )}
 
       {/* SIH Prototype Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-purple-500/20 pb-5 bg-gradient-to-r from-[#1A0F2E]/60 via-transparent to-transparent p-4 rounded-2xl border">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-purple-500/20 pb-5 bg-gradient-to-r from-[#1A0F2E]/80 via-[#1A0F2E]/40 to-transparent p-5 rounded-2xl border border-purple-500/25">
         <div>
-          <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+          <div className="flex items-center gap-2 mb-2 flex-wrap">
             <span className="px-2.5 py-0.5 rounded-md text-[10px] font-mono font-bold uppercase bg-purple-600/30 text-purple-300 border border-purple-500/40">
               SIH 2026 • FUNCTIONAL PROTOTYPE
             </span>
             <span className="px-2.5 py-0.5 rounded-md text-[10px] font-mono font-bold uppercase bg-pink-500/15 text-pink-300 border border-pink-500/30">
-              TEAM TRISHUL • PROBLEM STATEMENT PS189
+              TEAM TRISHUL • PS189
             </span>
             <span className="px-2.5 py-0.5 rounded-md text-[10px] font-mono uppercase bg-gray-800 text-gray-400 border border-gray-700">
               SYNTHETIC DEMONSTRATION DATA
@@ -130,9 +130,9 @@ export default function DashboardPage() {
             <ShieldAlert className="text-purple-400 w-7 h-7 shrink-0" />
             TRISHUL — CRIMINAL NETWORK ANALYSIS SYSTEM
           </h1>
-          <p className="text-gray-400 text-xs md:text-sm mt-1 flex items-center gap-2 font-mono">
-            <span>Core Concept:</span>
-            <strong className="text-purple-300">Identity → Evidence → Connections → Intelligence</strong>
+          <p className="text-gray-300 text-xs md:text-sm mt-1.5 flex items-center gap-2 font-mono flex-wrap">
+            <span className="text-gray-400">Core Narrative:</span>
+            <strong className="text-purple-300">Document → Identity → Evidence → Network → Timeline → Intelligence</strong>
           </p>
         </div>
 
@@ -146,10 +146,10 @@ export default function DashboardPage() {
           </Link>
           <Link
             href="/demo"
-            className="px-4 py-2.5 bg-pink-600/20 hover:bg-pink-600/30 text-pink-300 border border-pink-500/40 font-semibold text-xs rounded-xl flex items-center gap-2 transition shadow-sm"
+            className="px-4 py-2.5 bg-pink-600/20 hover:bg-pink-600/30 text-pink-300 border border-pink-500/40 font-semibold text-xs rounded-xl flex items-center gap-2 transition shadow-sm font-mono"
           >
-            <Sparkles className="w-4 h-4 text-pink-400 animate-pulse" />
-            START SIH DEMO (8-Stage Flow)
+            <Sparkles className="w-4 h-4 text-pink-400" />
+            START SIH DEMO (8 Stages)
           </Link>
         </div>
       </div>
@@ -258,86 +258,141 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* Main Grid: Activity Feed, Central Active Case Network Focus, Priority Alerts */}
+      {/* Main Grid: Dominant Primary Case Investigation (2 Cols) + Intelligence Leads & Stream (1 Col) */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* LEFT: Activity Feed */}
-        <div className="col-span-1 h-full min-h-[440px]">
-          <ActivityFeed />
-        </div>
+        {/* DOMINANT CENTER: Primary Active Investigation Docket (2 Columns) */}
+        <div className="lg:col-span-2 bg-[#1A0F2E] rounded-2xl border border-purple-500/30 p-6 flex flex-col justify-between relative overflow-hidden shadow-xl">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-purple-900/25 via-[#1A0F2E] to-[#1A0F2E] pointer-events-none"></div>
 
-        {/* CENTER: Primary Active Investigation Network Summary */}
-        <div className="col-span-1 bg-[#1A0F2E] rounded-xl border border-purple-500/30 p-6 flex flex-col justify-between relative overflow-hidden group shadow-lg">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-900/25 via-[#1A0F2E] to-[#1A0F2E]"></div>
-          
-          <div className="z-10 w-full space-y-4">
-            <div className="flex justify-between items-start">
+          <div className="z-10 space-y-5">
+            {/* Docket Header */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-purple-500/20 pb-4">
               <div>
-                <span className="text-[10px] font-mono uppercase text-purple-400 tracking-wider font-bold">
-                  CENTRAL DEMO CASE
-                </span>
-                <h3 className="text-lg font-space font-bold text-white">
-                  Case #2026-041 (Operation Trishul)
+                <div className="flex items-center gap-2 mb-1 flex-wrap">
+                  <span className="text-[10px] font-mono uppercase bg-purple-500/20 text-purple-300 border border-purple-500/30 px-2 py-0.5 rounded font-bold">
+                    PRIMARY DEMONSTRATION CASE
+                  </span>
+                  <span className="text-[10px] font-mono uppercase bg-rose-500/20 text-rose-300 border border-rose-500/30 px-2 py-0.5 rounded font-bold">
+                    ACTIVE INVESTIGATION
+                  </span>
+                  <span className="text-[10px] font-mono uppercase bg-amber-500/20 text-amber-300 border border-amber-500/30 px-2 py-0.5 rounded font-bold">
+                    PRIORITY 82/100
+                  </span>
+                </div>
+                <h3 className="text-xl md:text-2xl font-space font-bold text-white">
+                  Case #2026-041 — Operation Trishul
                 </h3>
-                <p className="text-xs text-gray-400 mt-0.5 line-clamp-1">
-                  Multi-entity network investigation across narcotics & transit conduits.
+                <p className="text-xs text-gray-400 mt-1 max-w-2xl">
+                  Multi-entity criminal network inquiry correlating counterfeit documents, transit vehicle sightings, and narcotics syndicates across Bhopal and Indore.
                 </p>
               </div>
-              <span className="text-xs px-2 py-0.5 rounded bg-red-500/20 text-red-300 border border-red-500/30 font-bold font-mono shrink-0">
-                ACTIVE
-              </span>
+              <div className="text-right shrink-0">
+                <span className="text-xs font-mono text-gray-400">Lead Investigator:</span>
+                <div className="text-xs font-bold text-white font-mono">{primaryCase.leadOfficerName}</div>
+              </div>
             </div>
 
-            {/* Central Network Graphic */}
-            <div className="relative w-44 h-44 mx-auto my-2 flex items-center justify-center border-2 border-purple-500/40 rounded-full shadow-[0_0_30px_rgba(168,85,247,0.18)]">
-              <div className="absolute inset-2 border border-pink-400/30 rounded-full animate-pulse"></div>
-              <div className="absolute inset-6 border border-purple-400/20 rounded-full"></div>
-              <div className="text-center z-10">
-                <div className="text-3xl font-bold text-white font-mono">P-1042</div>
-                <div className="text-[10px] text-purple-300 font-bold uppercase mt-0.5">Rahul Mehra (Hub)</div>
-                <div className="text-[11px] text-amber-300 font-mono font-bold mt-0.5">
-                  {rahulDegree} Direct Links
+            {/* Two-Column Subject Profile & Network Center */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-center">
+              {/* Hub Graphic */}
+              <div className="p-4 bg-black/40 rounded-xl border border-purple-500/20 flex flex-col items-center justify-center text-center relative">
+                <div className="text-[10px] font-mono uppercase text-purple-400 tracking-wider font-bold mb-2">
+                  CORRELATED NETWORK HUB
+                </div>
+                <div className="relative w-36 h-36 flex items-center justify-center border-2 border-purple-500/40 rounded-full shadow-[0_0_20px_rgba(168,85,247,0.15)] bg-purple-950/20">
+                  <div className="absolute inset-2 border border-pink-400/20 rounded-full"></div>
+                  <div className="text-center z-10">
+                    <div className="text-2xl font-bold text-white font-mono">P-1042</div>
+                    <div className="text-[11px] text-purple-300 font-bold uppercase mt-0.5">Rahul Mehra</div>
+                    <div className="text-xs text-amber-300 font-mono font-bold mt-1 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20 inline-block">
+                      {rahulDegree} Direct Links
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-3 text-[10px] font-mono text-amber-300/90 flex items-center gap-1">
+                  <span>Investigation Lead • Priority ≠ Guilt</span>
+                </div>
+              </div>
+
+              {/* Subject Details & Linked Assets */}
+              <div className="space-y-3">
+                <div className="p-3 bg-black/40 rounded-xl border border-purple-500/20 space-y-1.5 text-xs">
+                  <div className="flex justify-between items-center text-[10px] font-mono text-gray-400 uppercase border-b border-gray-800 pb-1">
+                    <span>Key Correlated Identifiers</span>
+                    <span className="text-purple-400 font-bold">VERIFIED LINKS</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400 font-mono">Alias / Street Name:</span>
+                    <span className="text-white font-medium">Rocky</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400 font-mono">Conduit Vehicle:</span>
+                    <span className="text-amber-300 font-mono font-bold">MP09-DEMO-4821</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400 font-mono">Mobile Identifier:</span>
+                    <span className="text-cyan-300 font-mono">ID-DEMO-88421</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400 font-mono">Evidentiary Document:</span>
+                    <span className="text-emerald-300 font-mono">DOC-2026-041-009</span>
+                  </div>
+                </div>
+
+                {/* Quick Stats Banner */}
+                <div className="grid grid-cols-3 gap-2 text-center text-xs py-2.5 bg-black/50 rounded-xl border border-purple-500/20">
+                  <div>
+                    <div className="text-lg font-bold text-purple-400 font-mono">{primaryCase.entityCount}</div>
+                    <div className="text-gray-500 text-[10px] uppercase font-mono">Entities</div>
+                  </div>
+                  <div>
+                    <div className="text-lg font-bold text-pink-400 font-mono">{primaryCase.crossCaseLinks}</div>
+                    <div className="text-gray-500 text-[10px] uppercase font-mono">Cross-Case</div>
+                  </div>
+                  <div>
+                    <div className="text-lg font-bold text-emerald-400 font-mono">94%</div>
+                    <div className="text-gray-500 text-[10px] uppercase font-mono">Match Score</div>
+                  </div>
                 </div>
               </div>
             </div>
-
-            {/* Quick Stats */}
-            <div className="grid grid-cols-3 gap-2 text-center text-xs py-2 bg-black/50 rounded-xl border border-purple-500/20">
-              <div>
-                <div className="text-base font-bold text-purple-400 font-mono">{primaryCase.entityCount}</div>
-                <div className="text-gray-500 text-[10px] uppercase">Entities</div>
-              </div>
-              <div>
-                <div className="text-base font-bold text-pink-400 font-mono">{primaryCase.crossCaseLinks}</div>
-                <div className="text-gray-500 text-[10px] uppercase">Cross-Case</div>
-              </div>
-              <div>
-                <div className="text-base font-bold text-emerald-400 font-mono">94%</div>
-                <div className="text-gray-500 text-[10px] uppercase">Resolution</div>
-              </div>
-            </div>
           </div>
 
-          <div className="z-10 pt-4 flex gap-2">
+          {/* Core Action Controls */}
+          <div className="z-10 pt-5 border-t border-purple-500/20 mt-4 grid grid-cols-2 sm:grid-cols-4 gap-2.5">
             <Link
               href="/cases/C-001/workspace"
-              className="flex-1 py-2 text-center bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold rounded-lg transition flex items-center justify-center gap-1.5 shadow-md shadow-purple-600/25"
+              className="py-2.5 px-3 text-center bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold rounded-xl transition flex items-center justify-center gap-1.5 shadow-md shadow-purple-600/25 font-mono"
             >
-              <SlidersHorizontal className="w-3.5 h-3.5" /> Open Workspace
+              <SlidersHorizontal className="w-3.5 h-3.5" /> OPEN WORKSPACE
             </Link>
             <Link
               href="/network"
-              className="flex-1 py-2 text-center bg-gray-800 hover:bg-gray-700 text-gray-200 text-xs font-medium rounded-lg border border-gray-700 transition flex items-center justify-center gap-1"
+              className="py-2.5 px-3 text-center bg-gray-800 hover:bg-gray-700 text-gray-200 text-xs font-medium rounded-xl border border-gray-700 transition flex items-center justify-center gap-1.5 font-mono"
             >
-              <Network className="w-3.5 h-3.5" /> Full Graph
+              <Network className="w-3.5 h-3.5 text-purple-400" /> INSPECT GRAPH
+            </Link>
+            <Link
+              href="/documents/D-001"
+              className="py-2.5 px-3 text-center bg-gray-800 hover:bg-gray-700 text-gray-200 text-xs font-medium rounded-xl border border-gray-700 transition flex items-center justify-center gap-1.5 font-mono"
+            >
+              <FileText className="w-3.5 h-3.5 text-amber-400" /> DOC FORENSICS
+            </Link>
+            <Link
+              href="/evidence?caseId=C-001"
+              className="py-2.5 px-3 text-center bg-gray-800 hover:bg-gray-700 text-gray-200 text-xs font-medium rounded-xl border border-gray-700 transition flex items-center justify-center gap-1.5 font-mono"
+            >
+              <FileKey className="w-3.5 h-3.5 text-emerald-400" /> VIEW EVIDENCE
             </Link>
           </div>
         </div>
 
-        {/* RIGHT: Real Priority Alerts */}
-        <div className="col-span-1 bg-[#1A0F2E] rounded-xl border border-purple-500/20 p-5 flex flex-col justify-between shadow-lg">
-          <div>
-            <div className="flex justify-between items-center mb-3">
-              <h3 className="text-base font-space font-bold text-white flex items-center gap-2">
+        {/* RIGHT COLUMN: Priority Leads & Live Activity Stream (1 Column) */}
+        <div className="lg:col-span-1 space-y-6">
+          {/* Priority Alerts */}
+          <div className="bg-[#1A0F2E] rounded-2xl border border-purple-500/25 p-5 shadow-lg space-y-3">
+            <div className="flex justify-between items-center">
+              <h3 className="text-sm font-space font-bold text-white flex items-center gap-2">
                 <AlertTriangle className="w-4 h-4 text-red-400" />
                 Investigation Priority Leads
               </h3>
@@ -345,36 +400,35 @@ export default function DashboardPage() {
                 All ({seedAlerts.length}) &rarr;
               </Link>
             </div>
-            <div className="text-[11px] text-amber-300/80 bg-amber-500/10 border border-amber-500/20 p-2 rounded-lg mb-3 font-mono">
-              <strong>SAFETY PRINCIPLE:</strong> Leads indicate review urgency, NOT guilt. Human review required.
+            <div className="text-[10px] text-amber-300/90 bg-amber-500/10 border border-amber-500/20 p-2 rounded-lg font-mono">
+              <strong>SAFETY PRINCIPLE:</strong> Urgency indicator for authorized review, NOT proof of guilt.
             </div>
 
-            <div className="space-y-2.5">
-              {topAlerts.map(alert => (
+            <div className="space-y-2">
+              {topAlerts.slice(0, 3).map(alert => (
                 <Link
                   key={alert.id}
                   href={alert.caseId ? `/cases/${alert.caseId}` : '/alerts'}
-                  className="block bg-black/30 p-3 rounded-lg border border-red-500/20 hover:border-purple-500/40 transition-colors group"
+                  className="block bg-black/30 p-2.5 rounded-lg border border-red-500/20 hover:border-purple-500/40 transition-colors group"
                 >
-                  <div className="flex justify-between items-start mb-1">
-                    <span className="text-[10px] font-bold font-mono px-1.5 py-0.5 rounded bg-red-500/20 text-red-300 border border-red-500/30">
+                  <div className="flex justify-between items-start mb-0.5">
+                    <span className="text-[9px] font-bold font-mono px-1.5 py-0.5 rounded bg-red-500/20 text-red-300 border border-red-500/30">
                       {alert.severity}
                     </span>
-                    <span className="text-[10px] text-gray-500 font-mono">{alert.category}</span>
+                    <span className="text-[9px] text-gray-500 font-mono">{alert.category}</span>
                   </div>
                   <h4 className="text-xs font-bold text-white group-hover:text-purple-300 transition-colors truncate">
                     {alert.title}
                   </h4>
-                  <p className="text-[11px] text-gray-400 line-clamp-1 mt-0.5">{alert.description}</p>
+                  <p className="text-[10px] text-gray-400 line-clamp-1 mt-0.5">{alert.description}</p>
                 </Link>
               ))}
             </div>
           </div>
 
-          <div className="pt-3 border-t border-gray-800 text-right">
-            <Link href="/alerts" className="text-xs text-purple-400 hover:text-purple-300 font-medium font-mono">
-              Open Full Alert Center &rarr;
-            </Link>
+          {/* Activity Feed */}
+          <div className="h-[280px]">
+            <ActivityFeed />
           </div>
         </div>
       </div>

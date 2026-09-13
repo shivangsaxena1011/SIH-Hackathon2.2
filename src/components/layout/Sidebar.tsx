@@ -45,6 +45,7 @@ interface NavItem {
 const PRIMARY_INVESTIGATION_NAV: NavItem[] = [
   { label: 'Command Center', icon: LayoutDashboard, href: '/dashboard', resource: 'dashboard' },
   { label: 'Investigation Cases', icon: Briefcase, href: '/cases', resource: 'cases' },
+  { label: 'Document Forensics', icon: FileText, href: '/documents', resource: 'documents' },
   { label: 'Evidence Vault', icon: ShieldCheck, href: '/evidence', resource: 'evidence' },
   { label: 'Knowledge Graph', icon: Share2, href: '/network', resource: 'network' },
   { label: 'Timeline & Replay', icon: Clock, href: '/timeline', resource: 'timeline' },
@@ -52,19 +53,15 @@ const PRIMARY_INVESTIGATION_NAV: NavItem[] = [
   { label: 'AI Insights Engine', icon: Brain, href: '/insights', resource: 'insights' },
 ];
 
-const INVESTIGATOR_TOOLS_NAV: NavItem[] = [
-  { label: 'Document Forensics', icon: FileText, href: '/documents', resource: 'documents' },
-  { label: 'Path Finder & Query', icon: SlidersHorizontal, href: '/query', resource: 'cases' },
+const ADVANCED_SUPPORTING_NAV: NavItem[] = [
+  { label: 'Start SIH Demo', icon: Play, href: '/demo', resource: 'dashboard', highlight: true },
   { label: 'Cross-Case Analysis', icon: GitMerge, href: '/cross-case', resource: 'insights' },
+  { label: 'Path Finder & Query', icon: SlidersHorizontal, href: '/query', resource: 'cases' },
   { label: 'Persons Registry', icon: Users, href: '/persons', resource: 'persons' },
   { label: 'ANPR Vehicles', icon: Car, href: '/vehicles', resource: 'vehicles' },
   { label: 'Identifiers', icon: Fingerprint, href: '/identifiers', resource: 'identifiers' },
-  { label: 'Alerts', icon: Bell, href: '/alerts', resource: 'alerts' },
+  { label: 'Priority Alerts', icon: Bell, href: '/alerts', resource: 'alerts' },
   { label: 'NOVA Assistant', icon: Bot, href: '/assistant', resource: 'assistant' },
-];
-
-const PROTOTYPE_GOVERNANCE_NAV: NavItem[] = [
-  { label: 'Start SIH Demo', icon: Play, href: '/demo', resource: 'dashboard', highlight: true },
   { label: 'Runtime Audit Ledger', icon: ScrollText, href: '/audit', resource: 'audit' },
   { label: 'Prototype Security', icon: Shield, href: '/security', resource: 'security' },
   { label: 'Settings', icon: Settings, href: '/settings', resource: 'settings' },
@@ -74,10 +71,10 @@ export default function Sidebar({ userRole }: SidebarProps) {
   const pathname = usePathname();
   const [isCollapsed, setIsCollapsed] = useState(false);
 
-  const renderNavGroup = (items: typeof PRIMARY_INVESTIGATION_NAV, groupTitle?: string) => (
+  const renderNavGroup = (items: NavItem[], groupTitle?: string) => (
     <div className="space-y-1">
       {groupTitle && !isCollapsed && (
-        <div className="px-3 pt-3 pb-1 text-[10px] font-mono uppercase tracking-wider text-purple-400/70 font-semibold">
+        <div className="px-3 pt-3 pb-1 text-[10px] font-mono uppercase tracking-wider text-purple-400/80 font-bold border-t border-purple-500/10 first:border-t-0">
           {groupTitle}
         </div>
       )}
@@ -125,7 +122,7 @@ export default function Sidebar({ userRole }: SidebarProps) {
                 size={16}
                 className={cn(
                   "shrink-0 transition-colors",
-                  isActive ? "text-purple-300" : item.highlight ? "text-pink-400 animate-pulse" : "text-gray-400 group-hover:text-gray-200"
+                  isActive ? "text-purple-300" : item.highlight ? "text-pink-400" : "text-gray-400 group-hover:text-gray-200"
                 )}
               />
               {!isCollapsed && (
@@ -177,9 +174,8 @@ export default function Sidebar({ userRole }: SidebarProps) {
       </div>
 
       <nav className="flex-1 overflow-y-auto py-2 px-2 scrollbar-thin scrollbar-thumb-purple-900 scrollbar-track-transparent space-y-2">
-        {renderNavGroup(PRIMARY_INVESTIGATION_NAV, 'Investigation Core')}
-        {renderNavGroup(INVESTIGATOR_TOOLS_NAV, 'Supporting Tools')}
-        {renderNavGroup(PROTOTYPE_GOVERNANCE_NAV, 'Demonstration & Control')}
+        {renderNavGroup(PRIMARY_INVESTIGATION_NAV, 'Primary Investigation')}
+        {renderNavGroup(ADVANCED_SUPPORTING_NAV, 'Advanced & Supporting')}
       </nav>
 
       <div className="p-3 border-t border-purple-500/20 flex justify-end">

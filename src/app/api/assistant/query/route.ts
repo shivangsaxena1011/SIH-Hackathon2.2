@@ -181,11 +181,11 @@ STATUTORY NOTICE: PRIORITY != GUILT. This score directs investigative resource a
 • Primary Subjects: Rahul Mehra (Degree 7 hub), Arjun Verma (Degree 3)
 • Verified Evidence Items: 4 cryptographically sealed SHA-256 artifacts
 • Active Cross-Case Links: Operation Kavach (#2026-017) and Operation Netra (#2025-089)
-• Section 65B Compliance: Digital chain of custody maintained for judicial submission.
+• 65B-Oriented Evidence Trail: Electronic chain of custody tracked with SHA-256 integrity logs (Prototype demonstration — physical judicial attestation required in production).
 You can view the full printable dossier or export markdown in the Investigation Workspace.`;
       sources = [
         "Investigation Brief Generator",
-        "Section 65B Evidentiary Log",
+        "65B-Oriented Electronic Custody Log",
         "Case #2026-041 Executive Summary"
       ];
     }

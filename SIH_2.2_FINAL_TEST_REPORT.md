@@ -5,7 +5,7 @@
 **Protected Baseline Repository:** `https://github.com/shivangsaxena1011/SIH-Hackathon2.1` (Untouched & Protected)  
 **Problem Statement:** PS189 — AI-Powered Criminal Network Analysis System  
 **Date of Verification:** 2026-09-13  
-**Overall Status:** ✅ **100% PASSED (PRODUCTION READY FOR HACKATHON DEMO)**
+**Overall Status:** ✅ **100% PASSED (SIH DEMO READY • FUNCTIONAL PROTOTYPE VERIFIED)**
 
 ---
 
@@ -152,7 +152,7 @@
 
 1. **HttpOnly Cookie Authority**: Verified that neither `/api/auth/login` nor `/api/auth/session` leaks raw token strings in response JSON bodies. The secure HttpOnly cookie is the sole authorization bearer.
 2. **HMAC-SHA256 Tamper Resistance**: Verified that modifying role payload (e.g. from `officer` to `admin`) invalidates the cryptographic signature and immediately triggers rejection.
-3. **Audit Ledger Logging**: Verified that every authenticated action and access denial writes an immutable entry into the Append-Only Runtime Audit Ledger.
+3. **Audit Ledger Logging**: Verified that every authenticated action and access denial writes an entry into the Append-Only Runtime Audit Ledger.
 4. **Binary & Magic-Byte File Validation**: Upload endpoints verify file magic bytes preventing executable injection.
 
 ---
@@ -165,4 +165,4 @@
 - **Primary Demonstration Case**: Case #2026-041 (Operation Trishul) with primary subject Rahul Mehra (P-1042) dynamically verified at degree 7.
 - **Explainability & Ethics**: Formalized "PRIORITY ≠ GUILT" disclaimers across all AI insights, priority scorers, and entity resolution views.
 - **Runtime Audit Ledger**: Accurately labeled as an Append-Only Runtime Audit Ledger with production WORM / distributed ledger roadmap.
-- **Section 65B Legal Brief**: Court-ready electronic evidence brief generation with strict chain of custody documentation.
+- **Section 65B-Oriented Brief**: Electronic custody dossier generation structured for Section 65B evidential considerations (Prototype demonstration).

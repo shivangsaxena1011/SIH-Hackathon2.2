@@ -190,16 +190,29 @@ export default function LoginPage() {
             transition={{ duration: 0.4, delay: 0.1 }}
             className="text-2xl md:text-3xl font-space-grotesk font-bold text-white tracking-wider mb-2"
           >
-            TRISHUL INTELLIGENCE COMMAND
+            TRISHUL
           </motion.h1>
-          <motion.p
+          <motion.div
             initial={{ y: 15, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.4, delay: 0.15 }}
-            className="text-purple-300/80 font-medium tracking-wide uppercase text-xs"
+            className="space-y-2"
           >
-            SIH 2026 • AI Criminal Network Analysis System (PS189)
-          </motion.p>
+            <p className="text-purple-300 font-medium tracking-wide text-xs md:text-sm">
+              AI-POWERED CRIMINAL NETWORK ANALYSIS SYSTEM
+            </p>
+            <div className="flex items-center justify-center gap-1.5 flex-wrap">
+              <span className="text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                SIH 2026 • FUNCTIONAL PROTOTYPE
+              </span>
+              <span className="text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded bg-pink-500/15 text-pink-300 border border-pink-500/30">
+                PS189
+              </span>
+              <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-gray-800 text-gray-400 border border-gray-700">
+                SYNTHETIC DEMONSTRATION ENVIRONMENT
+              </span>
+            </div>
+          </motion.div>
         </div>
 
         {/* Main login card */}
@@ -220,11 +233,11 @@ export default function LoginPage() {
               onClick={() => handleDirectDemoLogin('officer.demo')}
               className="w-full flex items-center justify-center space-x-3 bg-gradient-to-r from-purple-600 via-purple-500 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold py-3.5 px-5 rounded-xl transition-all tracking-wider text-sm shadow-[0_0_25px_rgba(168,85,247,0.4)] hover:shadow-[0_0_35px_rgba(168,85,247,0.6)] cursor-pointer disabled:opacity-50 active:scale-[0.99]"
             >
-              <Zap size={18} className="text-yellow-300 fill-yellow-300 animate-pulse" />
+              <Zap size={18} className="text-yellow-300 fill-yellow-300" />
               <span>⚡ ONE-CLICK DEMO ACCESS (OFFICER)</span>
             </button>
-            <p className="text-[11px] text-center text-gray-400 mt-1.5">
-              Instantly logs into command center with Inspector Priya Sharma&apos;s credentials
+            <p className="text-[11px] text-center text-gray-400 mt-1.5 font-mono">
+              Pre-authenticates Inspector Priya Sharma for live SIH demonstration
             </p>
           </div>
 

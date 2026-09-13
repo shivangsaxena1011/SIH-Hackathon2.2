@@ -23,7 +23,7 @@ export default function StatusBar() {
     <div className="h-8 bg-[#0B0716] border-t border-purple-500/20 flex items-center justify-between px-4 text-[11px] font-mono shrink-0 select-none">
       <div className="flex items-center space-x-4 overflow-hidden">
         <div className="flex items-center space-x-1.5 text-purple-300 font-bold tracking-wider truncate">
-          <span className="h-2 w-2 rounded-full bg-purple-400 animate-pulse"></span>
+          <span className="h-2 w-2 rounded-full bg-purple-400"></span>
           <span>SIH 2026 Functional Prototype • Synthetic Demonstration Data • Authorized Investigation Workflow</span>
         </div>
       </div>

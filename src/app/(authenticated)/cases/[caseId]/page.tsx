@@ -14,6 +14,7 @@ import {
 } from '@/data/seed';
 import { getStatusBgColor, getPriorityColor, formatDate, formatDateTime } from '@/lib/utils';
 import { cn } from '@/lib/utils';
+import { getNodeDegree } from '@/lib/graph/graph-service';
 import { ErrorBoundary } from '@/components/common/ErrorBoundary';
 
 export default function CaseDetailPage() {
@@ -91,7 +92,7 @@ export default function CaseDetailPage() {
           <p>{accessDenied}</p>
         </div>
         <p className="text-xs text-gray-500">
-          A security violation log has been recorded in the tamper-evident audit ledger (Result: DENIED).
+          A security violation log has been recorded in the append-only runtime audit ledger (Result: DENIED).
         </p>
         <div className="flex justify-center gap-4">
           <button
@@ -164,18 +165,27 @@ export default function CaseDetailPage() {
             <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30 font-bold uppercase">
               SIH 2026 Prototype Docket
             </span>
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 border border-rose-500/30 font-bold uppercase">
+              ACTIVE INVESTIGATION
+            </span>
           </div>
-          <div className="flex items-center gap-2 mb-2 text-xs font-mono">
+          <div className="flex items-center gap-2 mb-2 text-xs font-mono flex-wrap">
             <span className="text-gray-400">PRIMARY SUBJECT:</span>
             <Link href="/persons/P-1042" className="text-amber-300 font-bold hover:underline">
               Rahul Mehra (P-1042)
             </Link>
-            <span className="text-gray-500">• Network Hub (7 direct links)</span>
+            <span className="text-gray-400">• Network Hub ({getNodeDegree('P-1042')} direct correlated links)</span>
+            <span className="text-amber-400 font-bold border border-amber-500/30 bg-amber-500/10 px-1.5 py-0.5 rounded text-[10px]">
+              PRIORITY ≠ GUILT
+            </span>
+            <span className="text-gray-400 border border-gray-700 bg-gray-800/80 px-1.5 py-0.5 rounded text-[10px]">
+              HUMAN REVIEW REQUIRED
+            </span>
           </div>
           <p className="text-gray-400 text-sm max-w-2xl">{caseData.description}</p>
         </div>
         <div className="flex flex-col gap-2 items-start md:items-end shrink-0">
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 items-center flex-wrap">
             <span className={`text-[10px] px-3 py-1 rounded-md border font-medium uppercase tracking-wider ${getStatusBgColor(caseData.status)}`}>
               {caseData.status}
             </span>
@@ -189,7 +199,7 @@ export default function CaseDetailPage() {
               <SlidersHorizontal className="w-3.5 h-3.5" /> LAUNCH WORKSPACE &rarr;
             </Link>
           </div>
-          <div className="text-xs text-gray-400 mt-2">
+          <div className="text-xs text-gray-400 mt-1">
             Lead: <span className="text-gray-200 font-medium">{caseData.leadOfficerName}</span>
           </div>
           <div className="text-[11px] text-gray-500">

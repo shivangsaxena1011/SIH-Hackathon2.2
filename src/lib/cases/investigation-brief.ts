@@ -75,7 +75,7 @@ export function generateInvestigationBrief(caseQuery: string, generatedBy: strin
     'Execute urgent physical verification of suspect identity card DOC-2026-041-009 with issuing authority.',
     'Issue inter-jurisdictional notification to Indore Crime Branch regarding shared vehicle MP09-DEMO-4821 transit.',
     'Subpoena cell site metadata for identifier ID-DEMO-88421 across Bhopal Central Zone.',
-    'Maintain Section 65B compliance for all SHA-256 cryptographic hashes logged in the Evidence Registry.'
+    'Maintain continuous SHA-256 integrity logs for all records included in the 65B-oriented evidence dossier.'
   ];
 
   return {

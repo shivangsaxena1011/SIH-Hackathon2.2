@@ -66,15 +66,15 @@ export default function SecurityPage() {
     <div className="p-6 max-w-7xl mx-auto space-y-8">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold font-space text-white">SECURITY & TRUST CENTER</h1>
+          <h1 className="text-3xl font-bold font-space text-white">PROTOTYPE SECURITY CONTROLS</h1>
           <p className="text-gray-400 mt-1 text-sm flex items-center">
             <Shield className="w-4 h-4 mr-2 text-green-400" />
-            Zero-Trust Architectural Posture & Proof of Compliance
+            Prototype Security Controls & Verifiable Architecture Proof (SIH 2026)
           </p>
         </div>
         <div className="bg-green-500/10 border border-green-500/20 px-4 py-2 rounded-xl flex items-center">
           <span className="text-2xl font-bold text-green-400 mr-2 font-mono">98/100</span>
-          <span className="text-xs text-green-500/80 uppercase font-mono">Demo Security<br/>Health Score</span>
+          <span className="text-xs text-green-500/80 uppercase font-mono">Prototype Security<br/>Health Score</span>
         </div>
       </div>
 
@@ -118,8 +118,8 @@ export default function SecurityPage() {
             <FileCheck className="w-5 h-5 text-green-400" />
           </div>
           <div>
-            <h3 className="text-white font-medium mb-1">Tamper-Evident Audit Ledger</h3>
-            <p className="text-xs text-gray-400 mb-2">Every authentication, case query, and permission denial is logged.</p>
+            <h3 className="text-white font-medium mb-1">Append-Only Runtime Audit Ledger</h3>
+            <p className="text-xs text-gray-400 mb-2">Every authentication, case query, and permission denial logged. Prototype runtime audit implementation (persistent/WORM storage in production).</p>
             <span className="text-xs text-green-400 flex items-center"><CheckCircle className="w-3.5 h-3.5 mr-1"/> Active Logging</span>
           </div>
         </div>
@@ -156,7 +156,7 @@ export default function SecurityPage() {
               Live Security Demonstrations for SIH Judges
             </h2>
             <p className="text-xs text-gray-400 mt-1">
-              Trigger live security routines to observe runtime enforcement and tamper-evident audit ledger generation.
+              Trigger live security routines to observe runtime enforcement and append-only audit ledger generation.
             </p>
           </div>
           <span className="text-xs bg-purple-500/20 text-purple-300 font-mono px-2.5 py-1 rounded border border-purple-500/30">

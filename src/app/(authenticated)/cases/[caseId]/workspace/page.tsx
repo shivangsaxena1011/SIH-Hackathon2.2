@@ -156,8 +156,8 @@ export default function CaseWorkspacePage({
             </div>
           </div>
 
-          {/* Center: Priority Score Badge */}
-          <div className="flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-[#0B0716] border border-purple-500/30">
+          {/* Center: Priority Score Badge & Safety Notices */}
+          <div className="flex items-center space-x-3 px-3 py-1.5 rounded-lg bg-[#0B0716] border border-purple-500/30">
             <div className="text-right">
               <div className="text-[9px] font-mono text-gray-400 uppercase tracking-widest">
                 PRIORITY INDEX
@@ -169,11 +169,9 @@ export default function CaseWorkspacePage({
                 </span>
               </div>
             </div>
-            <div
-              className="p-1.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20"
-              title="PRIORITY != GUILT: Urgency indicator for authorized review"
-            >
-              <AlertTriangle className="w-4 h-4" />
+            <div className="border-l border-gray-800 pl-2.5 flex flex-col justify-center text-[10px] font-mono">
+              <span className="text-amber-400 font-bold">PRIORITY ≠ GUILT</span>
+              <span className="text-gray-400">HUMAN REVIEW REQUIRED</span>
             </div>
           </div>
 
