@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Bell, ShieldAlert, AlertTriangle, Info, ArrowRight, Eye, Shield, CheckCircle2, Network, FileText, X } from 'lucide-react';
+import { ArrowRight, Eye, Shield, CheckCircle2, Network, FileText, X } from 'lucide-react';
 import Link from 'next/link';
 import type { Alert } from '@/types';
 

@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { IntelligenceMap } from '@/components/map/IntelligenceMap';
 import type { MapPoint, EntityType } from '@/types';
-import { Map, MapPin, Activity, Filter } from 'lucide-react';
+import { Map, MapPin, Filter, Activity } from 'lucide-react';
 import { getEntityTypeColor } from '@/lib/utils';
 
 const entityTypes: EntityType[] = ['PERSON', 'VEHICLE', 'IDENTIFIER'];

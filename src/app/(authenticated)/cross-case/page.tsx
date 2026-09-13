@@ -1,6 +1,6 @@
 'use client';
 
-import { GitMerge, ArrowRight, ShieldAlert, Check, Minus, Layers, ExternalLink } from 'lucide-react';
+import { GitMerge, ArrowRight, ShieldAlert, Minus, Layers, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 
 export default function CrossCasePage() {

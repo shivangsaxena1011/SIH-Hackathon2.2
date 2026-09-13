@@ -1,16 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Brain,
   X,
-  ArrowRight,
   ShieldCheck,
   CheckCircle2,
-  FileCheck,
-  Lightbulb,
-  ExternalLink
+  Lightbulb
 } from 'lucide-react';
 import { getEvidenceChainForInsight } from '@/lib/ai/evidence-chain';
 import type { EvidenceChain } from '@/types';
@@ -26,7 +23,7 @@ export default function WhyInsightModal({
   onClose,
   insightId
 }: WhyInsightModalProps) {
-  const [chain] = useState<EvidenceChain>(() => getEvidenceChainForInsight(insightId));
+  const chain = useMemo<EvidenceChain>(() => getEvidenceChainForInsight(insightId), [insightId]);
 
   if (!isOpen || !chain) return null;
 

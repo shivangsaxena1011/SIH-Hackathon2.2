@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShieldAlert, AlertTriangle, Info, CheckCircle2, ChevronDown, ChevronUp, Link as LinkIcon, Shield, Network, FileText, ArrowRight } from 'lucide-react';
+import { ShieldAlert, ChevronDown, ChevronUp, Link as LinkIcon, Shield, Network, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import type { Insight } from '@/types';
 import { seedInsights } from '@/data/seed';

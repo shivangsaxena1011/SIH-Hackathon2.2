@@ -1,6 +1,6 @@
 'use client';
 
-import { MapPin, Search } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 import { seedLocations } from '@/data/seed';
 
 export default function LocationsPage() {

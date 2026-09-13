@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { 
   UploadCloud, CheckCircle, AlertTriangle, FileText, ArrowRight, 
   ShieldCheck, Activity, KeyRound, Sparkles, Fingerprint 

@@ -1,4 +1,4 @@
-import { seedCases, seedPersons, seedRelationships, seedEvents, seedVehicles, seedLocations } from '@/data/seed';
+import { seedCases } from '@/data/seed';
 
 export interface AIInsight {
   id: string;

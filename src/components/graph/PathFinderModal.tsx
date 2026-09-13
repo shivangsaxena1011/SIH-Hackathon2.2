@@ -48,15 +48,15 @@ export default function PathFinderModal({
   );
   const [maxHops, setMaxHops] = useState(5);
 
-  const handleSearch = (s: string = source, t: string = target) => {
-    const res = findInvestigationPath(s, t, maxHops);
+  const handleSearch = (s: string = source, t: string = target, hops: number = maxHops) => {
+    const res = findInvestigationPath(s, t, hops);
     setPathResult(res);
   };
 
   const selectPreset = (presetSource: string, presetTarget: string) => {
     setSource(presetSource);
     setTarget(presetTarget);
-    handleSearch(presetSource, presetTarget);
+    handleSearch(presetSource, presetTarget, maxHops);
   };
 
   const getEntityIcon = (type: EntityType) => {
@@ -136,7 +136,7 @@ export default function PathFinderModal({
                 className="w-full bg-[#0B0716] border border-purple-500/30 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-purple-500"
               />
             </div>
-            <div className="md:col-span-5">
+            <div className="md:col-span-4">
               <label className="text-[11px] font-mono text-gray-400 block mb-1">DESTINATION ENTITY</label>
               <input
                 type="text"
@@ -146,9 +146,29 @@ export default function PathFinderModal({
                 className="w-full bg-[#0B0716] border border-purple-500/30 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-purple-500"
               />
             </div>
+            <div className="md:col-span-1">
+              <label className="text-[11px] font-mono text-gray-400 block mb-1">DEPTH</label>
+              <select
+                value={maxHops}
+                onChange={e => {
+                  const val = parseInt(e.target.value, 10);
+                  setMaxHops(val);
+                  handleSearch(source, target, val);
+                }}
+                className="w-full bg-[#0B0716] border border-purple-500/30 rounded-lg px-2 py-2 text-sm text-white focus:outline-none focus:border-purple-500 font-mono"
+                title="Max Hops / Degrees of Separation"
+              >
+                <option value={2}>2</option>
+                <option value={3}>3</option>
+                <option value={4}>4</option>
+                <option value={5}>5</option>
+                <option value={6}>6</option>
+                <option value={8}>8</option>
+              </select>
+            </div>
             <div className="md:col-span-2 flex items-end">
               <button
-                onClick={() => handleSearch()}
+                onClick={() => handleSearch(source, target, maxHops)}
                 className="w-full py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-sm font-semibold rounded-lg shadow-lg flex items-center justify-center gap-1.5 transition-all"
               >
                 <Search className="w-4 h-4" /> TRACE

@@ -33,6 +33,16 @@ export default function InvestigationReplay({
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackSpeed, setPlaybackSpeed] = useState<number>(2000); // 2 sec per event
 
+  // Sync external event selection
+  useEffect(() => {
+    if (selectedEventId) {
+      const idx = events.findIndex(e => e.id === selectedEventId);
+      if (idx !== -1) {
+        setCurrentIndex(idx);
+      }
+    }
+  }, [selectedEventId, events]);
+
   // Auto playback loop
   useEffect(() => {
     let interval: NodeJS.Timeout;

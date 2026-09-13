@@ -1,5 +1,5 @@
 import { seedCases, seedPersons, seedEvidence, seedEvents } from '@/data/seed';
-import { getCanonicalCaseId, findCanonicalCase } from './case-service';
+import { findCanonicalCase } from './case-service';
 import { calculateInvestigationPriorityScore } from '@/lib/ai/priority-score';
 import { getNodeDegree } from '@/lib/graph/graph-service';
 import type { InvestigationBrief } from '@/types';

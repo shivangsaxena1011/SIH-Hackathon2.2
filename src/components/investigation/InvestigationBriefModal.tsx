@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   FileText,
@@ -9,7 +9,6 @@ import {
   X,
   ShieldCheck,
   AlertTriangle,
-  ExternalLink,
   Copy,
   Check
 } from 'lucide-react';
@@ -27,7 +26,7 @@ export default function InvestigationBriefModal({
   onClose,
   caseQuery
 }: InvestigationBriefModalProps) {
-  const [brief] = useState<InvestigationBrief>(() => generateInvestigationBrief(caseQuery));
+  const brief = useMemo<InvestigationBrief>(() => generateInvestigationBrief(caseQuery), [caseQuery]);
   const [copiedHash, setCopiedHash] = useState<string | null>(null);
 
   if (!isOpen) return null;

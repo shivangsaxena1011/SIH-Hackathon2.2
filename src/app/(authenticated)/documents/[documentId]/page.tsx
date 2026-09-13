@@ -1,21 +1,20 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { seedDocuments } from '@/data/seed';
 import type { Document } from '@/types';
 import { 
-  FileText, ShieldAlert, Fingerprint, Network, ScanText, FileImage, 
+  ShieldAlert, Network, ScanText, FileImage, 
   ChevronDown, ChevronUp, AlertTriangle, CheckCircle, Info, Link as LinkIcon,
-  CheckCircle2, RefreshCw, ExternalLink, ArrowRight
+  CheckCircle2, RefreshCw, ArrowRight, ArrowLeft
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ErrorBoundary } from '@/components/common/ErrorBoundary';
 
 export default function DocumentDetailPage() {
   const params = useParams();
-  const router = useRouter();
   const [doc, setDoc] = useState<Document | null>(null);
   const [expandedSignal, setExpandedSignal] = useState<string | null>(null);
   const [isResolving, setIsResolving] = useState(false);
@@ -117,6 +116,13 @@ export default function DocumentDetailPage() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-gray-800 pb-4">
         <div>
           <div className="flex items-center gap-2 mb-1 flex-wrap">
+            <Link
+              href="/documents"
+              className="p-1 rounded-lg bg-gray-800 hover:bg-gray-700 text-gray-300 transition-colors mr-1"
+              title="Return to Documents"
+            >
+              <ArrowLeft className="w-4 h-4" />
+            </Link>
             <h1 className="text-2xl font-bold text-white font-space">DOCUMENT FORENSIC SCREENING</h1>
             <span className="bg-purple-500/20 text-purple-300 text-xs px-2.5 py-0.5 rounded border border-purple-500/30 font-bold font-mono">
               SIH 2026 • SYNTHETIC FIXTURE

@@ -6,29 +6,25 @@ import {
   SlidersHorizontal,
   Search,
   GitMerge,
-  Filter,
-  ExternalLink,
-  ShieldCheck,
   User,
   Car,
   FileText,
   Briefcase,
   Fingerprint,
-  Sparkles,
-  ArrowRight
+  Sparkles
 } from 'lucide-react';
 import Link from 'next/link';
 import { getFullGraph } from '@/lib/graph/graph-service';
 import { seedCases } from '@/data/seed';
+import { getCanonicalCaseId } from '@/lib/cases/case-service';
 import PathFinderModal from '@/components/graph/PathFinderModal';
-import type { EntityType, CasePriority } from '@/types';
+import type { EntityType } from '@/types';
 
 export default function InvestigationQueryPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedType, setSelectedType] = useState<EntityType | 'ALL'>('ALL');
   const [selectedCase, setSelectedCase] = useState<string>('ALL');
   const [selectedRisk, setSelectedRisk] = useState<string>('ALL');
-  const [minConfidence, setMinConfidence] = useState<number>(60);
   const [isPathFinderOpen, setIsPathFinderOpen] = useState(false);
   const [pathFinderTarget, setPathFinderTarget] = useState<string>('P-1412');
 
@@ -261,7 +257,7 @@ export default function InvestigationQueryPage() {
                 </button>
                 {node.caseIds[0] && (
                   <Link
-                    href={`/cases/${node.caseIds[0]}/workspace`}
+                    href={`/cases/${getCanonicalCaseId(node.caseIds[0])}/workspace`}
                     className="text-indigo-300 hover:text-white flex items-center gap-1 text-[11px] transition-colors"
                   >
                     Workspace &rarr;

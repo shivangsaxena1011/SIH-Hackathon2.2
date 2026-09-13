@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
+import Link from 'next/link';
 import { User, Activity } from 'lucide-react';
 import type { Person, Relationship } from '@/types';
-import { seedPersons, seedRelationships, seedCases, seedVehicles, seedLocations, seedDocuments } from '@/data/seed';
+import { seedPersons, seedRelationships, seedCases, seedVehicles, seedDocuments } from '@/data/seed';
 
 export default function PersonProfilePage() {
   const params = useParams();
@@ -193,14 +194,14 @@ export default function PersonProfilePage() {
         {activeTab === 'CASES' && (
            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {associatedCases.map(c => (
-                <div key={c.id} className="p-4 bg-[#1A0F2E] border border-gray-800 rounded-xl">
+                <Link key={c.id} href={`/cases/${c.id}`} className="p-4 bg-[#1A0F2E] hover:bg-[#251542] border border-gray-800 hover:border-purple-500/40 transition-colors rounded-xl block">
                   <div className="flex justify-between items-center mb-2">
                     <span className="font-mono text-purple-400 font-semibold">Case #{c.caseNumber}</span>
                     <span className="text-xs px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">{c.status}</span>
                   </div>
                   <h4 className="text-white font-medium mb-1">{c.title}</h4>
                   <p className="text-xs text-gray-400">{c.description}</p>
-                </div>
+                </Link>
               ))}
               {associatedCases.length === 0 && <p className="text-gray-500 p-4">No associated cases found.</p>}
            </div>
@@ -209,10 +210,10 @@ export default function PersonProfilePage() {
         {activeTab === 'VEHICLES' && (
            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {associatedVehicles.map(v => (
-                <div key={v.id} className="p-4 bg-[#1A0F2E] border border-gray-800 rounded-xl">
+                <Link key={v.id} href="/vehicles" className="p-4 bg-[#1A0F2E] hover:bg-[#251542] border border-gray-800 hover:border-purple-500/40 transition-colors rounded-xl block">
                   <div className="font-mono text-amber-400 font-semibold text-lg mb-1">{v.registration}</div>
                   <p className="text-sm text-gray-300">{v.make} {v.model} ({v.color}) — {v.type}</p>
-                </div>
+                </Link>
               ))}
               {associatedVehicles.length === 0 && <p className="text-gray-500 p-4">No associated vehicles found.</p>}
            </div>
@@ -221,14 +222,14 @@ export default function PersonProfilePage() {
         {activeTab === 'DOCUMENTS' && (
            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {associatedDocuments.map(d => (
-                <div key={d.id} className="p-4 bg-[#1A0F2E] border border-gray-800 rounded-xl">
+                <Link key={d.id} href={`/documents/${d.id}`} className="p-4 bg-[#1A0F2E] hover:bg-[#251542] border border-gray-800 hover:border-purple-500/40 transition-colors rounded-xl block">
                   <div className="flex justify-between items-center mb-1">
                     <span className="font-mono text-emerald-400 text-sm">{d.documentId}</span>
                     <span className="text-xs px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">{d.documentType}</span>
                   </div>
                   <p className="text-sm text-gray-300">{d.fileName}</p>
                   <p className="text-xs text-gray-500 font-mono mt-1">Hash: {d.hash.substring(0, 16)}...</p>
-                </div>
+                </Link>
               ))}
               {associatedDocuments.length === 0 && <p className="text-gray-500 p-4">No documents directly assigned.</p>}
            </div>

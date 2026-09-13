@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Bell, AlertTriangle, ChevronRight, X, Sparkles, Check, ArrowUpRight } from 'lucide-react';
+import { Bell, AlertTriangle, ChevronRight, X, Check } from 'lucide-react';
 import { getCaseDeltas } from '@/lib/cases/delta-monitor';
 import type { InvestigationDelta } from '@/types';
 
@@ -11,7 +11,7 @@ interface InvestigationChangeBannerProps {
 }
 
 export default function InvestigationChangeBanner({ caseQuery }: InvestigationChangeBannerProps) {
-  const [delta] = useState<InvestigationDelta>(() => getCaseDeltas(caseQuery));
+  const delta = useMemo<InvestigationDelta>(() => getCaseDeltas(caseQuery), [caseQuery]);
   const [isOpen, setIsOpen] = useState(false);
   const [dismissed, setDismissed] = useState(false);
 

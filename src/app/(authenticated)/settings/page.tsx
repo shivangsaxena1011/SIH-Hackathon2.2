@@ -24,9 +24,9 @@ export default function SettingsPage() {
           router.push('/dashboard?reset=true');
         }, 1000);
       } else {
-        setMessage('Failed to reset demo data.');
+        setMessage(data.error || 'Failed to reset demo data.');
       }
-    } catch (e) {
+    } catch {
       setMessage('Error connecting to reset API.');
     } finally {
       setResetting(false);

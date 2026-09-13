@@ -4,16 +4,15 @@ import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { 
-  Users, Activity, ShieldAlert, FileText, Calendar, 
-  MapPin, ShieldCheck, Brain, ArrowLeft, ExternalLink, Hash, Car, SlidersHorizontal
+  Users, Activity, ShieldAlert,
+  MapPin, ShieldCheck, ArrowLeft, ExternalLink, Hash, Car, SlidersHorizontal
 } from 'lucide-react';
-import type { Case, Person, Vehicle, Identifier, Document, Evidence, Event, Insight } from '@/types';
+import type { Case } from '@/types';
 import { 
-  seedPersons, seedCases, seedVehicles, seedIdentifiers, seedLocations,
+  seedPersons, seedCases, seedVehicles, seedIdentifiers,
   seedDocuments, seedEvidence, seedEvents, seedInsights, seedAuditLogs
 } from '@/data/seed';
-import { getStatusBgColor, getPriorityColor, formatDate, formatDateTime } from '@/lib/utils';
-import { cn } from '@/lib/utils';
+import { getStatusBgColor, getPriorityColor, formatDate, formatDateTime, cn } from '@/lib/utils';
 import { getNodeDegree } from '@/lib/graph/graph-service';
 import { ErrorBoundary } from '@/components/common/ErrorBoundary';
 
@@ -129,6 +128,9 @@ export default function CaseDetailPage() {
 
   // Filter linked items
   const linkedPersons = seedPersons.filter(p => p.associatedCaseIds.includes(caseData.id));
+  const primaryPerson = (caseData.id === 'C-001' || caseData.caseNumber === '2026-041')
+    ? (seedPersons.find(p => p.id === 'P-1042') || linkedPersons[0])
+    : linkedPersons[0];
   const linkedVehicles = seedVehicles.filter(v => v.associatedCaseIds.includes(caseData.id));
   const linkedIdentifiers = seedIdentifiers.filter(i => i.associatedCaseIds.includes(caseData.id));
   const linkedDocuments = seedDocuments.filter(d => d.caseId === caseData.id);
@@ -169,19 +171,21 @@ export default function CaseDetailPage() {
               ACTIVE INVESTIGATION
             </span>
           </div>
-          <div className="flex items-center gap-2 mb-2 text-xs font-mono flex-wrap">
-            <span className="text-gray-400">PRIMARY SUBJECT:</span>
-            <Link href="/persons/P-1042" className="text-amber-300 font-bold hover:underline">
-              Rahul Mehra (P-1042)
-            </Link>
-            <span className="text-gray-400">• Network Hub ({getNodeDegree('P-1042')} direct correlated links)</span>
-            <span className="text-amber-400 font-bold border border-amber-500/30 bg-amber-500/10 px-1.5 py-0.5 rounded text-[10px]">
-              PRIORITY ≠ GUILT
-            </span>
-            <span className="text-gray-400 border border-gray-700 bg-gray-800/80 px-1.5 py-0.5 rounded text-[10px]">
-              HUMAN REVIEW REQUIRED
-            </span>
-          </div>
+          {primaryPerson && (
+            <div className="flex items-center gap-2 mb-2 text-xs font-mono flex-wrap">
+              <span className="text-gray-400">PRIMARY SUBJECT:</span>
+              <Link href={`/persons/${primaryPerson.id}`} className="text-amber-300 font-bold hover:underline">
+                {primaryPerson.name} ({primaryPerson.id})
+              </Link>
+              <span className="text-gray-400">• Network Hub ({getNodeDegree(primaryPerson.id)} direct correlated links)</span>
+              <span className="text-amber-400 font-bold border border-amber-500/30 bg-amber-500/10 px-1.5 py-0.5 rounded text-[10px]">
+                PRIORITY ≠ GUILT
+              </span>
+              <span className="text-gray-400 border border-gray-700 bg-gray-800/80 px-1.5 py-0.5 rounded text-[10px]">
+                HUMAN REVIEW REQUIRED
+              </span>
+            </div>
+          )}
           <p className="text-gray-400 text-sm max-w-2xl">{caseData.description}</p>
         </div>
         <div className="flex flex-col gap-2 items-start md:items-end shrink-0">

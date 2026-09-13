@@ -1,32 +1,23 @@
 'use client';
 
 import React, { useState, useMemo, use } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import {
   GitMerge,
   Clock,
   MapPin,
   Brain,
-  Filter,
   FileText,
-  AlertTriangle,
-  ShieldAlert,
   Search,
-  ExternalLink,
-  ChevronRight,
-  Sparkles,
   Share2,
-  RefreshCw,
-  Eye,
   SlidersHorizontal,
   ArrowLeft
 } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { findCanonicalCase, getCanonicalCaseId } from '@/lib/cases/case-service';
+import { findCanonicalCase } from '@/lib/cases/case-service';
 import { calculateInvestigationPriorityScore } from '@/lib/ai/priority-score';
 import { getCaseGraph, getNodeDegree } from '@/lib/graph/graph-service';
-import { seedEvents, seedLocations, seedInsights, seedCases } from '@/data/seed';
+import { seedEvents, seedLocations, seedInsights, seedCases, seedPersons } from '@/data/seed';
 import { NetworkGraph } from '@/components/graph/NetworkGraph';
 import { IntelligenceMap } from '@/components/map/IntelligenceMap';
 import { TimelineView } from '@/components/timeline/TimelineView';
@@ -35,7 +26,7 @@ import InvestigationBriefModal from '@/components/investigation/InvestigationBri
 import InvestigationReplay from '@/components/investigation/InvestigationReplay';
 import InvestigationChangeBanner from '@/components/investigation/InvestigationChangeBanner';
 import WhyInsightModal from '@/components/investigation/WhyInsightModal';
-import type { Event, MapPoint, EntityType, CasePriority } from '@/types';
+import type { Event, MapPoint, EntityType } from '@/types';
 
 type WorkspaceTab = 'NETWORK' | 'TIMELINE' | 'MAP' | 'INSIGHTS' | 'QUERY';
 
@@ -68,6 +59,14 @@ export default function CaseWorkspacePage({
   // Data computations
   const priorityScore = useMemo(() => calculateInvestigationPriorityScore(c.id), [c.id]);
   const graphData = useMemo(() => getCaseGraph(c.id), [c.id]);
+
+  const linkedPersons = useMemo(() => seedPersons.filter(p => p.associatedCaseIds.includes(c.id)), [c.id]);
+  const primaryPerson = useMemo(() => {
+    if (c.id === 'C-001' || c.caseNumber === '2026-041') {
+      return seedPersons.find(p => p.id === 'P-1042') || linkedPersons[0];
+    }
+    return linkedPersons[0];
+  }, [c.id, c.caseNumber, linkedPersons]);
 
   const caseEvents = useMemo(() => {
     const canonical = c.id.toLowerCase();
@@ -144,15 +143,17 @@ export default function CaseWorkspacePage({
                   ACTIVE INVESTIGATION
                 </span>
               </div>
-              <div className="flex items-center gap-2 mt-1 flex-wrap">
-                <span className="text-[11px] font-mono text-gray-400">PRIMARY SUBJECT:</span>
-                <Link href="/persons/P-1042" className="text-xs font-mono font-bold text-amber-300 hover:text-amber-200 underline">
-                  Rahul Mehra (P-1042)
-                </Link>
-                <span className="text-[10px] text-gray-400 font-mono">
-                  • Network Hub ({getNodeDegree('P-1042')} Direct Correlated Links)
-                </span>
-              </div>
+              {primaryPerson && (
+                <div className="flex items-center gap-2 mt-1 flex-wrap">
+                  <span className="text-[11px] font-mono text-gray-400">PRIMARY SUBJECT:</span>
+                  <Link href={`/persons/${primaryPerson.id}`} className="text-xs font-mono font-bold text-amber-300 hover:text-amber-200 underline">
+                    {primaryPerson.name} ({primaryPerson.id})
+                  </Link>
+                  <span className="text-[10px] text-gray-400 font-mono">
+                    • Network Degree: {getNodeDegree(primaryPerson.id)} Direct Correlated Links
+                  </span>
+                </div>
+              )}
             </div>
           </div>
 

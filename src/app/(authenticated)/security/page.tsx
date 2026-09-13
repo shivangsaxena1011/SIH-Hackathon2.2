@@ -31,7 +31,7 @@ export default function SecurityPage() {
           auditLogged: true,
         });
       }
-    } catch (e) {
+    } catch {
       setRbacResult({
         status: 'ERROR',
         message: 'Security enforcement triggered error.',
