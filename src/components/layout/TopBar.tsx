@@ -173,13 +173,23 @@ export default function TopBar({ user: initialUser }: TopBarProps) {
             <SlidersHorizontal size={12} /> Workspace
           </Link>
         </div>
+
+        {/* Prototype Indicators */}
+        <div className="hidden xl:flex items-center gap-2">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] font-mono font-bold bg-purple-500/15 text-purple-300 border border-purple-500/30">
+            SIH 2026 • FUNCTIONAL PROTOTYPE
+          </span>
+          <span className="hidden 2xl:inline-flex items-center gap-1 px-2 py-1 rounded-md text-[10px] font-mono text-pink-300 bg-pink-500/10 border border-pink-500/25">
+            SYNTHETIC DATA
+          </span>
+        </div>
       </div>
 
       <div className="flex items-center space-x-5">
         <div className="flex items-center space-x-4 border-r border-gray-800 pr-5">
-          <div className="flex items-center space-x-2 text-[11px]">
+          <div className="flex items-center space-x-2 text-[11px]" title="Authorized Investigator Session">
             <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
-            <span className="text-green-400 font-mono font-bold tracking-wider">PROTECTED</span>
+            <span className="text-green-400 font-mono font-bold tracking-wider">AUTHORIZED</span>
           </div>
 
           <Link 

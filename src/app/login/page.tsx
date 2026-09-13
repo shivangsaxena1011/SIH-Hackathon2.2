@@ -190,7 +190,7 @@ export default function LoginPage() {
             transition={{ duration: 0.4, delay: 0.1 }}
             className="text-2xl md:text-3xl font-space-grotesk font-bold text-white tracking-wider mb-2"
           >
-            SENTINEL INTELLIGENCE ACCESS
+            TRISHUL INTELLIGENCE COMMAND
           </motion.h1>
           <motion.p
             initial={{ y: 15, opacity: 0 }}
@@ -198,7 +198,7 @@ export default function LoginPage() {
             transition={{ duration: 0.4, delay: 0.15 }}
             className="text-purple-300/80 font-medium tracking-wide uppercase text-xs"
           >
-            Secure Criminal Network & Document Intelligence Platform (PS189)
+            SIH 2026 • AI Criminal Network Analysis System (PS189)
           </motion.p>
         </div>
 

@@ -14,17 +14,18 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <ShieldCheck className="text-purple-500" size={28} />
-            <span className="font-space-grotesk font-bold text-white tracking-widest text-xl">SENTINEL</span>
+            <span className="font-space-grotesk font-bold text-white tracking-widest text-xl">TRISHUL</span>
+            <span className="text-[10px] font-mono text-purple-400 bg-purple-500/10 border border-purple-500/20 px-2 py-0.5 rounded">SIH 2026</span>
           </div>
           <div className="flex items-center space-x-4">
-            <div className="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-500 text-xs font-bold uppercase tracking-widest">
-              Demo Environment
+            <div className="px-3 py-1 rounded-full bg-pink-500/10 border border-pink-500/20 text-pink-300 text-xs font-bold uppercase tracking-wider">
+              Synthetic Demonstration Data
             </div>
             <Link 
               href="/login"
               className="px-5 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-bold rounded-lg transition-colors shadow-[0_0_15px_rgba(168,85,247,0.3)] hover:shadow-[0_0_25px_rgba(168,85,247,0.5)]"
             >
-              System Login
+              Enter Prototype Console
             </Link>
           </div>
         </div>
@@ -42,10 +43,13 @@ export default function LandingPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-mono font-bold mb-6">
+              SMART INDIA HACKATHON 2026 • PS189 FUNCTIONAL PROTOTYPE
+            </div>
             <h1 className="text-5xl md:text-7xl font-space-grotesk font-bold text-white tracking-tight mb-6 leading-tight">
-              AI-POWERED <br className="hidden md:block" />
+              TRISHUL <br className="hidden md:block" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
-                CRIMINAL INTELLIGENCE
+                CRIMINAL NETWORK ANALYSIS
               </span>
             </h1>
           </motion.div>
@@ -54,11 +58,13 @@ export default function LandingPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-10 leading-relaxed"
+            className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-10 leading-relaxed font-mono"
           >
-            Turn fragmented investigation data into explainable connections. 
-            A comprehensive command center for law enforcement to visualize networks, 
-            verify documents, and uncover hidden intelligence.
+            Identity → Evidence → Connections → Intelligence
+            <span className="block text-sm text-gray-500 mt-2 font-sans">
+              Functional SIH prototype demonstrating multi-source criminal correlation, 
+              forensic document screening, and explainable network traversal for authorized investigators.
+            </span>
           </motion.p>
 
           <motion.div

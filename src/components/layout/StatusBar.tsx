@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { formatDateTime } from '@/lib/utils';
-import { ShieldCheck, Activity, AlertTriangle } from 'lucide-react';
+import { ShieldCheck, Activity } from 'lucide-react';
 
 export default function StatusBar() {
   const [time, setTime] = useState<string>('');
@@ -21,25 +21,23 @@ export default function StatusBar() {
 
   return (
     <div className="h-8 bg-[#0B0716] border-t border-purple-500/20 flex items-center justify-between px-4 text-[11px] font-mono shrink-0 select-none">
-      <div className="flex items-center space-x-6">
-        <div className="flex items-center space-x-1.5 text-green-500">
-          <ShieldCheck size={12} />
-          <span>SECURITY STATUS: PROTECTED</span>
-        </div>
-        
-        <div className="flex items-center space-x-1.5 text-green-500">
-          <Activity size={12} />
-          <span>AUDIT: ACTIVE</span>
-        </div>
-        
-        <div className="flex items-center space-x-1.5 text-amber-500 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">
-          <AlertTriangle size={12} />
-          <span className="font-bold">ENVIRONMENT: DEMO</span>
+      <div className="flex items-center space-x-4 overflow-hidden">
+        <div className="flex items-center space-x-1.5 text-purple-300 font-bold tracking-wider truncate">
+          <span className="h-2 w-2 rounded-full bg-purple-400 animate-pulse"></span>
+          <span>SIH 2026 Functional Prototype • Synthetic Demonstration Data • Authorized Investigation Workflow</span>
         </div>
       </div>
       
-      <div className="flex items-center space-x-4">
-        <span className="text-gray-500">SIH-INTEL-V1.0</span>
+      <div className="flex items-center space-x-4 shrink-0 text-gray-400">
+        <div className="hidden md:flex items-center space-x-1.5 text-emerald-400">
+          <ShieldCheck size={12} />
+          <span>PROTOTYPE SECURITY: ACTIVE</span>
+        </div>
+        <div className="hidden lg:flex items-center space-x-1.5 text-purple-400">
+          <Activity size={12} />
+          <span>RUNTIME AUDIT: ACTIVE</span>
+        </div>
+        <span className="text-gray-500">TEAM TRISHUL</span>
         <span className="text-gray-400">{time}</span>
       </div>
     </div>
