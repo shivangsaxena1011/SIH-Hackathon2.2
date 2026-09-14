@@ -28,7 +28,8 @@ import {
   Shield,
   Play,
   SlidersHorizontal,
-  LogOut
+  LogOut,
+  Video
 } from 'lucide-react';
 import { useAuth } from '@/lib/auth/auth-context';
 
@@ -52,6 +53,7 @@ const PRIMARY_INVESTIGATION_NAV: NavItem[] = [
   { label: 'Knowledge Graph', icon: Share2, href: '/network', resource: 'network' },
   { label: 'Timeline & Replay', icon: Clock, href: '/timeline', resource: 'timeline' },
   { label: 'Intelligence Map', icon: MapPin, href: '/map', resource: 'map' },
+  { label: 'Live View/ Camera', icon: Video, href: '/live-cameras', resource: 'dashboard' },
   { label: 'AI Insights Engine', icon: Brain, href: '/insights', resource: 'insights' },
 ];
 
