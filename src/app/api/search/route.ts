@@ -20,10 +20,10 @@ export async function GET(req: Request) {
   // Search Persons
   seedPersons.forEach(p => {
     if (
-      p.name.toLowerCase().includes(query) ||
-      p.id.toLowerCase().includes(query) ||
-      p.personId.toLowerCase().includes(query) ||
-      (p.aliases && p.aliases.some(a => a.toLowerCase().includes(query)))
+      (p.name || '').toLowerCase().includes(query) ||
+      (p.id || '').toLowerCase().includes(query) ||
+      (p.personId || '').toLowerCase().includes(query) ||
+      ((p.aliases || []).some(a => (a || '').toLowerCase().includes(query)))
     ) {
       results.push({ id: p.id, type: 'PERSON', title: p.name, subtitle: `ID: ${p.id} | ${p.status}`, link: `/persons/${p.id}` });
     }

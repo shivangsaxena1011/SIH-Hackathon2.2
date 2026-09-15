@@ -7,7 +7,8 @@ export async function GET(req: Request) {
   
   let filtered = seedAlerts;
   if (severity) {
-    filtered = filtered.filter(a => a.severity === severity);
+    const sevLower = severity.toLowerCase();
+    filtered = filtered.filter(a => a.severity.toLowerCase() === sevLower);
   }
   
   return NextResponse.json(filtered);

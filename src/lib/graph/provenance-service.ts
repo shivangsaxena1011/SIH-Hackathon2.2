@@ -62,8 +62,8 @@ export function getRelationshipProvenance(
   };
 }
 
-export function getNodeProvenance(entityType: string, label: string): DataProvenance {
-  const type = entityType.toUpperCase();
+export function getNodeProvenance(entityType?: string, label: string = 'Entity'): DataProvenance {
+  const type = (entityType || '').toUpperCase();
   if (type === 'CASE' || type === 'EVIDENCE' || type === 'DOCUMENT') {
     return {
       type: 'RECORDED',

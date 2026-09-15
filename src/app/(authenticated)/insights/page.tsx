@@ -131,10 +131,10 @@ export default function InsightsPage() {
                     <div className="bg-[#0B0716]/60 rounded-xl p-4 border border-gray-800/80 space-y-3">
                       <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center">
                         <LinkIcon className="w-3.5 h-3.5 mr-1.5 text-pink-400" />
-                        Supporting Indicators ({insight.supportingIndicators.length})
+                        Supporting Indicators ({(insight.supportingIndicators || []).length})
                       </h3>
                       <div className="space-y-2">
-                        {insight.supportingIndicators.map((ind, i) => (
+                        {(insight.supportingIndicators || []).map((ind, i) => (
                           <div key={i} className="text-xs text-gray-300 flex items-start gap-2 bg-black/30 p-2 rounded-lg border border-gray-800/50">
                             <span className="text-green-400 font-bold">✓</span>
                             <div>

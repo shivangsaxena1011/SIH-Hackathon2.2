@@ -36,7 +36,7 @@ export default function InvestigationQueryPage() {
       if (selectedType !== 'ALL' && node.entityType !== selectedType) return false;
 
       // Case filter
-      if (selectedCase !== 'ALL' && !node.caseIds.some(cid => cid.toLowerCase() === selectedCase.toLowerCase())) {
+      if (selectedCase !== 'ALL' && !(node.caseIds || []).some(cid => (cid || '').toLowerCase() === selectedCase.toLowerCase())) {
         return false;
       }
 
@@ -229,7 +229,7 @@ export default function InvestigationQueryPage() {
               ) : null}
 
               <div className="mt-3 flex flex-wrap gap-1.5">
-                {node.caseIds.map(cid => (
+                {(node.caseIds || []).map(cid => (
                   <span
                     key={cid}
                     className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-black/40 text-gray-300 border border-purple-500/20"
@@ -255,9 +255,9 @@ export default function InvestigationQueryPage() {
                 >
                   <GitMerge className="w-3 h-3" /> Path
                 </button>
-                {node.caseIds[0] && (
+                {(node.caseIds || [])[0] && (
                   <Link
-                    href={`/cases/${getCanonicalCaseId(node.caseIds[0])}/workspace`}
+                    href={`/cases/${getCanonicalCaseId((node.caseIds || [])[0])}/workspace`}
                     className="text-indigo-300 hover:text-white flex items-center gap-1 text-[11px] transition-colors"
                   >
                     Workspace &rarr;

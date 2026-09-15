@@ -5,21 +5,30 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function formatDate(dateStr: string): string {
-  return new Date(dateStr).toLocaleDateString('en-IN', {
+export function formatDate(dateStr?: string | null): string {
+  if (!dateStr) return '—';
+  const d = new Date(dateStr);
+  if (isNaN(d.getTime())) return String(dateStr);
+  return d.toLocaleDateString('en-IN', {
     year: 'numeric', month: 'short', day: 'numeric',
   });
 }
 
-export function formatDateTime(dateStr: string): string {
-  return new Date(dateStr).toLocaleString('en-IN', {
+export function formatDateTime(dateStr?: string | null): string {
+  if (!dateStr) return '—';
+  const d = new Date(dateStr);
+  if (isNaN(d.getTime())) return String(dateStr);
+  return d.toLocaleString('en-IN', {
     year: 'numeric', month: 'short', day: 'numeric',
     hour: '2-digit', minute: '2-digit', second: '2-digit',
   });
 }
 
-export function formatTime(dateStr: string): string {
-  return new Date(dateStr).toLocaleTimeString('en-IN', {
+export function formatTime(dateStr?: string | null): string {
+  if (!dateStr) return '—';
+  const d = new Date(dateStr);
+  if (isNaN(d.getTime())) return String(dateStr);
+  return d.toLocaleTimeString('en-IN', {
     hour: '2-digit', minute: '2-digit',
   });
 }
@@ -94,7 +103,8 @@ export function getEntityTypeBg(type: string): string {
   }
 }
 
-export function truncate(str: string, length: number): string {
+export function truncate(str?: string | null, length: number = 50): string {
+  if (!str) return '';
   if (str.length <= length) return str;
   return str.substring(0, length) + '...';
 }

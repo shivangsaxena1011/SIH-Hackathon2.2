@@ -135,7 +135,7 @@ export default function DocumentDetailPage() {
         </div>
         <div className="flex flex-col items-start md:items-end gap-2">
           <div className="text-xs text-gray-500">
-            Hash (SHA-256): <span className="font-mono text-purple-400" title={doc.hash}>{doc.hash.substring(0, 24)}...</span>
+            Hash (SHA-256): <span className="font-mono text-purple-400" title={doc.hash}>{(doc.hash || '—').substring(0, 24)}...</span>
           </div>
           <button
             onClick={handleReAnalyze}
@@ -194,7 +194,7 @@ export default function DocumentDetailPage() {
               <div className="bg-[#0B0716] p-4 rounded-lg border border-gray-800">
                 <div className="text-xs text-gray-500 mb-1">Field Consistency</div>
                 <div className="flex items-center gap-2">
-                  {ocr?.fields.some(f => f.matchStatus === 'REVIEW_REQUIRED') ? (
+                  {ocr?.fields?.some(f => f.matchStatus === 'REVIEW_REQUIRED') ? (
                     <><AlertTriangle className="w-4 h-4 text-amber-500" /><span className="text-amber-400 font-medium text-sm">REVIEW REQUIRED (88%)</span></>
                   ) : (
                     <><CheckCircle className="w-4 h-4 text-green-500" /><span className="text-green-400 font-medium text-sm">CONSISTENT (94%)</span></>
@@ -241,7 +241,7 @@ export default function DocumentDetailPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {ocr?.fields.map((field, idx) => (
+                  {ocr?.fields?.map((field, idx) => (
                     <tr key={idx} className="border-b border-gray-800/50 hover:bg-white/5 transition-colors">
                       <td className="py-3 px-3 text-sm text-gray-300 font-medium">{field.fieldName}</td>
                       <td className="py-3 px-3 text-sm text-white font-mono">{field.value}</td>
@@ -281,12 +281,12 @@ export default function DocumentDetailPage() {
               <div className="bg-[#0B0716] p-4 rounded-lg border border-gray-800">
                 <div className="flex justify-between items-center mb-2">
                   <span className="text-sm font-medium text-gray-300">Image Quality</span>
-                  <span className={`text-xs font-bold ${forensics?.imageQuality.status === 'NORMAL' ? 'text-green-400' : 'text-amber-400'}`}>
-                    {forensics?.imageQuality.status}
+                  <span className={`text-xs font-bold ${forensics?.imageQuality?.status === 'NORMAL' ? 'text-green-400' : 'text-amber-400'}`}>
+                    {forensics?.imageQuality?.status || 'NORMAL'}
                   </span>
                 </div>
                 <div className="text-xs text-gray-500 space-y-1 mt-3">
-                  {forensics?.imageQuality.details && Object.entries(forensics.imageQuality.details).map(([k, v]) => (
+                  {forensics?.imageQuality?.details && Object.entries(forensics.imageQuality.details).map(([k, v]) => (
                     <div key={k} className="flex justify-between">
                       <span className="capitalize">{k}:</span>
                       <span className="text-gray-300">{v}</span>
@@ -298,15 +298,15 @@ export default function DocumentDetailPage() {
               <div className="bg-[#0B0716] p-4 rounded-lg border border-gray-800">
                 <div className="flex justify-between items-center mb-2">
                   <span className="text-sm font-medium text-gray-300">Visual Integrity</span>
-                  <span className={`text-xs font-bold ${forensics?.visualIntegrity.status === 'NORMAL' ? 'text-green-400' : 'text-amber-400'}`}>
-                    {forensics?.visualIntegrity.status}
+                  <span className={`text-xs font-bold ${forensics?.visualIntegrity?.status === 'NORMAL' ? 'text-green-400' : 'text-amber-400'}`}>
+                    {forensics?.visualIntegrity?.status || 'NORMAL'}
                   </span>
                 </div>
                 <div className="text-xs text-gray-500 space-y-1 mt-3">
-                  {forensics?.visualIntegrity.details && Object.entries(forensics.visualIntegrity.details).map(([k, v]) => (
+                  {forensics?.visualIntegrity?.details && Object.entries(forensics.visualIntegrity.details).map(([k, v]) => (
                     <div key={k} className="flex justify-between">
                       <span className="capitalize">{k.replace(/([A-Z])/g, ' $1').trim()}:</span>
-                      <span className={`${v.toLowerCase().includes('anomaly') ? 'text-amber-400 font-medium' : 'text-gray-300'}`}>{v}</span>
+                      <span className={`${String(v || '').toLowerCase().includes('anomaly') ? 'text-amber-400 font-medium' : 'text-gray-300'}`}>{v}</span>
                     </div>
                   ))}
                 </div>
@@ -315,7 +315,7 @@ export default function DocumentDetailPage() {
 
             <div className="space-y-3">
               <h3 className="text-sm font-medium text-gray-400 mb-2">Forensic Signals</h3>
-              {forensics?.signals.map((sig, idx) => (
+              {forensics?.signals?.map((sig, idx) => (
                 <div key={idx} className={`border rounded-lg overflow-hidden ${sig.status === 'SUSPICIOUS' ? 'border-amber-500/30' : 'border-gray-700'}`}>
                   <button 
                     onClick={() => setExpandedSignal(expandedSignal === sig.name ? null : sig.name)}
@@ -371,7 +371,7 @@ export default function DocumentDetailPage() {
 
             <div className="space-y-3">
               <div className="text-xs text-gray-500 uppercase tracking-wider">Candidate Matches</div>
-              {resolution?.candidates.map((cand, idx) => (
+              {resolution?.candidates?.map((cand, idx) => (
                 <div key={idx} className={`bg-[#0B0716] border rounded-lg p-3 ${idx === 0 && isResolved ? 'border-purple-500/50 ring-1 ring-purple-500/20' : 'border-gray-800'}`}>
                   <div className="flex justify-between items-center mb-2">
                     <span className="font-medium text-gray-200">{cand.entityName}</span>
@@ -380,7 +380,7 @@ export default function DocumentDetailPage() {
                     </span>
                   </div>
                   <div className="space-y-1">
-                    {cand.matchSignals.map((ms, i) => (
+                    {cand.matchSignals?.map((ms, i) => (
                       <div key={i} className="flex justify-between text-xs">
                         <span className="text-gray-500">{ms.field}</span>
                         <span className={ms.score > 90 ? 'text-green-400' : ms.score > 50 ? 'text-amber-400' : 'text-gray-600'}>

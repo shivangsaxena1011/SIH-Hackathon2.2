@@ -2,24 +2,31 @@ import { seedPersons } from '@/data/seed';
 import { EntityCandidate, EntityResolutionResult, MatchSignal } from '@/types';
 
 export function resolveEntity(
-  name: string,
+  name?: string,
   dob?: string,
   documentNumber?: string
 ): EntityResolutionResult {
   const candidates: EntityCandidate[] = [];
+  if (!name || typeof name !== 'string' || !name.trim()) {
+    return {
+      candidates: [],
+      status: 'NO_MATCH',
+    };
+  }
+  const cleanName = name.trim();
 
   for (const person of seedPersons) {
     let score = 0;
     const signals: MatchSignal[] = [];
 
     // Simple mock logic for demo
-    if (person.name.toLowerCase() === name.toLowerCase()) {
+    if (person.name.toLowerCase() === cleanName.toLowerCase()) {
       score += 50;
       signals.push({ field: 'Name similarity', score: 96, description: 'Exact name match' });
-    } else if (person.aliases.some((alias) => alias.toLowerCase() === name.toLowerCase())) {
+    } else if ((person.aliases || []).some((alias) => alias.toLowerCase() === cleanName.toLowerCase())) {
       score += 40;
       signals.push({ field: 'Name similarity', score: 82, description: 'Alias match' });
-    } else if (person.name.toLowerCase().includes(name.split(' ')[0]?.toLowerCase() || '')) {
+    } else if (person.name.toLowerCase().includes(cleanName.split(' ')[0]?.toLowerCase() || '')) {
       score += 20;
       signals.push({ field: 'Name similarity', score: 55, description: 'Partial name match' });
     }

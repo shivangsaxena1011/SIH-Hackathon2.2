@@ -180,8 +180,8 @@ export default function InvestigationReplay({
           />
         </div>
         <div className="flex justify-between text-[10px] font-mono text-gray-500 mt-1">
-          <span>{new Date(events[0].timestamp).toLocaleDateString()}</span>
-          <span>{new Date(events[events.length - 1].timestamp).toLocaleDateString()}</span>
+          <span>{events[0]?.timestamp ? new Date(events[0].timestamp).toLocaleDateString() : '—'}</span>
+          <span>{events[events.length - 1]?.timestamp ? new Date(events[events.length - 1].timestamp).toLocaleDateString() : '—'}</span>
         </div>
       </div>
 
@@ -206,7 +206,7 @@ export default function InvestigationReplay({
                   {currentEvent.entityType}
                 </span>
                 <span className="text-[11px] font-mono text-gray-400">
-                  {new Date(currentEvent.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  {currentEvent.timestamp ? new Date(currentEvent.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '—'}
                 </span>
               </div>
               <p className="text-xs text-gray-300 mt-1">{currentEvent.description}</p>

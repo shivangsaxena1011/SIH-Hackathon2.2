@@ -204,9 +204,9 @@ export default function InvestigationBriefModal({
                     </div>
 
                     <div className="flex items-center gap-2 bg-black/40 px-2.5 py-1.5 rounded border border-purple-500/10 font-mono text-[11px] text-gray-300">
-                      <span>SHA-256: {e.hash.slice(0, 16)}...</span>
+                      <span>SHA-256: {(e.hash || '—').slice(0, 16)}...</span>
                       <button
-                        onClick={() => copyHash(e.hash)}
+                        onClick={() => copyHash(e.hash || '')}
                         className="hover:text-purple-300 text-gray-500 transition-colors print:hidden"
                       >
                         {copiedHash === e.hash ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}

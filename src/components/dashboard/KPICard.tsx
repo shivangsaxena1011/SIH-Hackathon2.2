@@ -16,6 +16,7 @@ export function KPICard({ title, value, icon: Icon, trend, color = 'text-purple-
   const [displayValue, setDisplayValue] = useState<number | string>(0);
 
   useEffect(() => {
+    let animId: number | null = null;
     if (typeof value === 'number') {
       const start = 0;
       const end = value;
@@ -26,15 +27,18 @@ export function KPICard({ title, value, icon: Icon, trend, color = 'text-purple-
         const progress = Math.min((timestamp - startTimestamp) / duration, 1);
         setDisplayValue(Math.floor(progress * (end - start) + start));
         if (progress < 1) {
-          window.requestAnimationFrame(step);
+          animId = window.requestAnimationFrame(step);
         } else {
           setDisplayValue(end);
         }
       };
-      window.requestAnimationFrame(step);
+      animId = window.requestAnimationFrame(step);
     } else {
       setDisplayValue(value);
     }
+    return () => {
+      if (animId !== null) window.cancelAnimationFrame(animId);
+    };
   }, [value]);
 
   return (

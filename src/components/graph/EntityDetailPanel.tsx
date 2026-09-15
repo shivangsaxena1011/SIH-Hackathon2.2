@@ -14,7 +14,18 @@ interface EntityDetailPanelProps {
 export function EntityDetailPanel({ node, edges, onClose }: EntityDetailPanelProps) {
   if (!node) return null;
 
-  const connectedEdges = edges.filter(e => e.source === node.id || e.target === node.id);
+  const getEndpointId = (endpoint: any): string => {
+    if (!endpoint) return '';
+    if (typeof endpoint === 'string') return endpoint;
+    if (typeof endpoint === 'object' && endpoint.id) return String(endpoint.id);
+    return String(endpoint);
+  };
+
+  const connectedEdges = edges.filter(e => {
+    const s = getEndpointId(e.source);
+    const t = getEndpointId(e.target);
+    return s === node.id || t === node.id;
+  });
 
   return (
     <AnimatePresence>
@@ -70,8 +81,10 @@ export function EntityDetailPanel({ node, edges, onClose }: EntityDetailPanelPro
                   <div className="text-xs text-gray-500">No relationships found.</div>
                 ) : (
                   connectedEdges.map(edge => {
-                    const isSource = edge.source === node.id;
-                    const otherNodeId = isSource ? edge.target : edge.source;
+                    const srcId = getEndpointId(edge.source);
+                    const tgtId = getEndpointId(edge.target);
+                    const isSource = srcId === node.id;
+                    const otherNodeId = isSource ? tgtId : srcId;
                     const dirText = isSource ? 'Target' : 'Source';
                     const isRecorded = edge.type === 'LINKED_TO' || edge.type === 'VERIFIED_AS' || edge.confidence >= 95;
                     return (

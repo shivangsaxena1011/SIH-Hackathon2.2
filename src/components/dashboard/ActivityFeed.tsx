@@ -30,7 +30,7 @@ export function ActivityFeed() {
                 </span>
               </div>
               <p className="text-gray-200">
-                <span className="font-medium text-white">{event.entityName}</span> {event.description.replace(event.entityName || '', '').trim()}
+                <span className="font-medium text-white">{event.entityName}</span> {(event.description || '').replace(event.entityName || '', '').trim()}
               </p>
             </div>
           </motion.div>

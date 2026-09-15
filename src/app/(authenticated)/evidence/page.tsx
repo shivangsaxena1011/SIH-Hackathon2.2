@@ -68,10 +68,10 @@ function EvidenceContent() {
       if (!searchQuery) return true;
       const q = searchQuery.toLowerCase();
       return (
-        item.id.toLowerCase().includes(q) ||
-        item.description.toLowerCase().includes(q) ||
-        item.type.toLowerCase().includes(q) ||
-        item.hash.toLowerCase().includes(q)
+        (item.id || '').toLowerCase().includes(q) ||
+        (item.description || '').toLowerCase().includes(q) ||
+        (item.type || '').toLowerCase().includes(q) ||
+        (item.hash || '').toLowerCase().includes(q)
       );
     });
   }, [evidence, searchQuery]);
@@ -224,7 +224,7 @@ function EvidenceContent() {
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-500">Timestamp:</span>
-                      <span className="text-gray-400">{new Date(item.createdAt).toLocaleDateString()}</span>
+                      <span className="text-gray-400">{item.createdAt ? new Date(item.createdAt).toLocaleDateString() : '—'}</span>
                     </div>
                   </div>
                 </div>

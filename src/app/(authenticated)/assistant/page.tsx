@@ -50,17 +50,26 @@ export default function AssistantPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query: userMessage.content })
       });
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
 
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: data.response,
-        sources: data.sources
+        content: data?.response || 'I was unable to process that query. Please try asking about Rahul Mehra or Case #2026-041.',
+        sources: Array.isArray(data?.sources) ? data.sources : []
       };
       setMessages(prev => [...prev, botMessage]);
     } catch (error) {
       console.error("Assistant error:", error);
+      setMessages(prev => [
+        ...prev,
+        {
+          id: (Date.now() + 1).toString(),
+          role: 'assistant',
+          content: 'An unexpected connection error occurred while querying intelligence records. Please try again.',
+          sources: []
+        }
+      ]);
     } finally {
       setIsLoading(false);
     }

@@ -74,7 +74,7 @@ export function getEvidenceChainForInsight(insightId: string): EvidenceChain {
     insightId: insight.id,
     title: insight.title,
     targetEntity: 'Subject Entities in Case Docket',
-    steps: insight.supportingIndicators.map((ind, idx) => ({
+    steps: (insight.supportingIndicators || []).map((ind, idx) => ({
       stepNumber: idx + 1,
       entityId: `IND-${idx + 1}`,
       entityType: 'EVENT',

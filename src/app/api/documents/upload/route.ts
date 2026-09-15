@@ -178,9 +178,9 @@ export async function POST(request: Request) {
     const analysis = analyzeDocument(docMeta);
 
     // 13. DETERMINISTIC ENTITY RESOLUTION
-    const extractedName = analysis.ocrData?.fields.find(f => f.fieldName === 'Name')?.value || 'Rahul Mehra';
-    const extractedDob = analysis.ocrData?.fields.find(f => f.fieldName === 'DOB')?.value || '1994-08-17';
-    const extractedDocNum = analysis.ocrData?.fields.find(f => f.fieldName === 'Document Number')?.value || 'DOC-DEMO-44192';
+    const extractedName = analysis.ocrData?.fields?.find(f => f.fieldName === 'Name')?.value || 'Rahul Mehra';
+    const extractedDob = analysis.ocrData?.fields?.find(f => f.fieldName === 'DOB')?.value || '1994-08-17';
+    const extractedDocNum = analysis.ocrData?.fields?.find(f => f.fieldName === 'Document Number')?.value || 'DOC-DEMO-44192';
     const entityResolution = resolveEntity(extractedName, extractedDob, extractedDocNum);
 
     // 14. RECORD AUDIT LOG ENTRY
@@ -199,7 +199,7 @@ export async function POST(request: Request) {
         mimeType,
         sha256: realSha256,
         securityScanStatus: 'PASSED',
-        bestMatchEntity: entityResolution.candidates[0]?.entityName || 'Rahul Mehra',
+        bestMatchEntity: entityResolution.candidates?.[0]?.entityName || 'Rahul Mehra',
         resolutionScore: `${entityResolution.resolvedConfidence || 94}%`
       }
     });

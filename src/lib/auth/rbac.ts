@@ -79,7 +79,7 @@ export function getAccessibleResources(role: UserRole): string[] {
   if (permissions.some(p => p.resource === '*')) {
     return ['dashboard', 'cases', 'persons', 'vehicles', 'identifiers', 'locations',
       'documents', 'evidence', 'network', 'timeline', 'map', 'insights', 'alerts',
-      'audit', 'security', 'users', 'settings', 'assistant', 'search'];
+      'audit', 'security', 'users', 'settings', 'assistant', 'search', 'live-cameras'];
   }
   
   return permissions.map(p => p.resource);

@@ -3,10 +3,11 @@ import { resolveEntity } from '@/lib/entity-resolution/resolver';
 
 export async function POST(request: Request) {
   try {
-    const { name, dob, documentNumber } = await request.json();
+    const body = await request.json().catch(() => ({}));
+    const { name, dob, documentNumber } = body;
     
-    if (!name) {
-      return NextResponse.json({ success: false, error: 'Name is required' }, { status: 400 });
+    if (!name || typeof name !== 'string' || !name.trim()) {
+      return NextResponse.json({ success: false, error: 'Valid name string is required' }, { status: 400 });
     }
     
     const resolution = resolveEntity(name, dob, documentNumber);

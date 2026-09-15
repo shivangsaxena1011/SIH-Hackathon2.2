@@ -16,7 +16,7 @@ export function generateInvestigationBrief(caseQuery: string, generatedBy: strin
 
   // Associated persons
   const primarySubjects = seedPersons
-    .filter(p => p.associatedCaseIds.includes(c.id) || p.associatedCaseIds.includes(c.caseNumber))
+    .filter(p => (p.associatedCaseIds || []).includes(c.id) || (p.associatedCaseIds || []).includes(c.caseNumber))
     .map(p => ({
       id: p.id,
       name: p.name,
@@ -125,7 +125,7 @@ ${brief.primarySubjects.map(s => `| ${s.id} | ${s.name} | ${s.role} | ${s.connec
 ## 3. KEY CRYPTOGRAPHIC EVIDENCE
 | Evidence ID | Category | Description | SHA-256 Hash | Integrity |
 | :--- | :--- | :--- | :--- | :--- |
-${brief.keyEvidence.map(e => `| ${e.id} | ${e.type} | ${e.description} | \`${e.hash.slice(0, 16)}...\` | ${e.integrityStatus} |`).join('\n')}
+${brief.keyEvidence.map(e => `| ${e.id} | ${e.type} | ${e.description} | \`${(e.hash || '—').slice(0, 16)}...\` | ${e.integrityStatus} |`).join('\n')}
 
 ---
 
@@ -135,7 +135,7 @@ ${brief.crossCaseLinks.map(l => `- **Linked Case #${l.caseNumber} (${l.caseTitle
 ---
 
 ## 5. CHRONOLOGICAL INCIDENT HIGHLIGHTS
-${brief.timelineHighlights.map(t => `- **${new Date(t.timestamp).toLocaleTimeString()}** — *${t.entityName}*: ${t.description} [Source: ${t.source}, Conf: ${t.confidence}%]`).join('\n')}
+${brief.timelineHighlights.map(t => `- **${t.timestamp ? new Date(t.timestamp).toLocaleTimeString() : '—'}** — *${t.entityName}*: ${t.description} [Source: ${t.source}, Conf: ${t.confidence}%]`).join('\n')}
 
 ---
 

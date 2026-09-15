@@ -28,10 +28,10 @@ export default function AuditPage() {
     if (!searchTerm) return true;
     const term = searchTerm.toLowerCase();
     return (
-      log.action.toLowerCase().includes(term) ||
-      log.resource.toLowerCase().includes(term) ||
+      (log.action || '').toLowerCase().includes(term) ||
+      (log.resource || '').toLowerCase().includes(term) ||
       (log.userName && log.userName.toLowerCase().includes(term)) ||
-      log.userId.toLowerCase().includes(term) ||
+      (log.userId || '').toLowerCase().includes(term) ||
       (log.caseId && log.caseId.toLowerCase().includes(term))
     );
   });
@@ -90,7 +90,7 @@ export default function AuditPage() {
               {filteredLogs.map((log) => (
                 <tr key={log.id} className="hover:bg-gray-800/20 transition-colors">
                   <td className="p-4 text-xs text-gray-400 font-mono whitespace-nowrap">
-                    {new Date(log.timestamp).toLocaleString()}
+                    {log.timestamp ? new Date(log.timestamp).toLocaleString() : '—'}
                   </td>
                   <td className="p-4 text-sm text-gray-300 font-medium">
                     {log.userName || log.userId}

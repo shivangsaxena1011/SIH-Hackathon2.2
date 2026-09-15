@@ -110,7 +110,7 @@ export default function AlertsPage() {
                   </span>
                   <span className="text-xs text-purple-400 uppercase font-mono font-medium">{alert.category}</span>
                   <span className="text-xs text-gray-500">•</span>
-                  <span className="text-xs text-gray-400 font-mono">{new Date(alert.createdAt).toLocaleString()}</span>
+                  <span className="text-xs text-gray-400 font-mono">{alert.createdAt ? new Date(alert.createdAt).toLocaleString() : '—'}</span>
                   {alert.status === 'ACKNOWLEDGED' && (
                     <span className="text-[10px] bg-green-500/10 border border-green-500/30 text-green-400 px-1.5 py-0.5 rounded">
                       ACKNOWLEDGED
@@ -195,7 +195,7 @@ export default function AlertsPage() {
                   </div>
                   <div className="p-3 bg-black/30 rounded-lg border border-gray-800">
                     <span className="text-gray-500 block mb-1">Timestamp</span>
-                    <span className="text-gray-300 font-mono">{new Date(selectedAlert.createdAt).toLocaleString()}</span>
+                    <span className="text-gray-300 font-mono">{selectedAlert.createdAt ? new Date(selectedAlert.createdAt).toLocaleString() : '—'}</span>
                   </div>
                 </div>
               </div>

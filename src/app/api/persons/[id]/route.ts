@@ -13,7 +13,7 @@ export async function GET(
       p.id.toLowerCase() === cleanId ||
       p.personId.toLowerCase() === cleanId ||
       p.name.toLowerCase() === cleanId ||
-      p.aliases.some(a => a.toLowerCase() === cleanId)
+      (p.aliases || []).some(a => a.toLowerCase() === cleanId)
   );
 
   if (!person) {

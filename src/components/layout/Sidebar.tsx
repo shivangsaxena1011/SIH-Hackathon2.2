@@ -77,7 +77,7 @@ export default function Sidebar({ userRole }: SidebarProps) {
   const { logout } = useAuth();
 
   const renderNavGroup = (items: NavItem[], groupTitle?: string) => (
-    <div className="space-y-1">
+    <ul className="space-y-1">
       {groupTitle && !isCollapsed && (
         <div className="px-3 pt-3 pb-1 text-[10px] font-mono uppercase tracking-wider text-purple-400/80 font-bold border-t border-purple-500/10 first:border-t-0">
           {groupTitle}
@@ -144,7 +144,7 @@ export default function Sidebar({ userRole }: SidebarProps) {
           </li>
         );
       })}
-    </div>
+    </ul>
   );
 
   return (

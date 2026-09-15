@@ -33,7 +33,7 @@ export default function PersonProfilePage() {
             p.id.toLowerCase() === cleanId ||
             p.personId.toLowerCase() === cleanId ||
             p.name.toLowerCase() === cleanId ||
-            p.aliases.some(a => a.toLowerCase() === cleanId)
+            (p.aliases || []).some(a => a.toLowerCase() === cleanId)
         ) || seedPersons[0];
 
         const rels = seedRelationships.filter(
@@ -228,7 +228,7 @@ export default function PersonProfilePage() {
                     <span className="text-xs px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">{d.documentType}</span>
                   </div>
                   <p className="text-sm text-gray-300">{d.fileName}</p>
-                  <p className="text-xs text-gray-500 font-mono mt-1">Hash: {d.hash.substring(0, 16)}...</p>
+                  <p className="text-xs text-gray-500 font-mono mt-1">Hash: {(d.hash || '—').substring(0, 16)}...</p>
                 </Link>
               ))}
               {associatedDocuments.length === 0 && <p className="text-gray-500 p-4">No documents directly assigned.</p>}

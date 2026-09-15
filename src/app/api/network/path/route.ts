@@ -3,7 +3,7 @@ import { findInvestigationPath } from '@/lib/graph/path-finder';
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
+    const body = await req.json().catch(() => ({}));
     const { source, target, maxHops } = body;
     if (!source || !target) {
       return NextResponse.json({ error: 'Source and target entities are required' }, { status: 400 });

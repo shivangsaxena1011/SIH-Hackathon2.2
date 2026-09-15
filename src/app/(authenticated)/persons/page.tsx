@@ -26,8 +26,9 @@ export default function PersonsPage() {
   }, []);
 
   const filteredPersons = persons.filter(p => 
-    p.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    (p.aliases && p.aliases.some(a => a.toLowerCase().includes(searchTerm.toLowerCase())))
+    (p.name || '').toLowerCase().includes(searchTerm.toLowerCase()) || 
+    (p.id || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+    ((p.aliases || []).some(a => (a || '').toLowerCase().includes(searchTerm.toLowerCase())))
   );
 
   return (

@@ -18,10 +18,18 @@ import type { AuditLog, AuditResult, UserRole } from '@/types';
  *   under Section 65B of the Indian Evidence Act.
  * ============================================================================
  */
-let runtimeAuditLogs: AuditLog[] = [...seedAuditLogs];
+interface GlobalAuditStore {
+  __SIH_AUDIT_LOGS__?: AuditLog[];
+}
+
+const globalAudit = globalThis as unknown as GlobalAuditStore;
+if (!globalAudit.__SIH_AUDIT_LOGS__) {
+  globalAudit.__SIH_AUDIT_LOGS__ = [...seedAuditLogs];
+}
 
 export function getAuditLogs(): AuditLog[] {
-  return [...runtimeAuditLogs].sort(
+  const logs = globalAudit.__SIH_AUDIT_LOGS__ || seedAuditLogs;
+  return [...logs].sort(
     (a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
   );
 }
@@ -55,10 +63,13 @@ export function recordAuditLog(params: {
     metadata: params.metadata,
   };
 
-  runtimeAuditLogs.unshift(newLog);
+  if (!globalAudit.__SIH_AUDIT_LOGS__) {
+    globalAudit.__SIH_AUDIT_LOGS__ = [...seedAuditLogs];
+  }
+  globalAudit.__SIH_AUDIT_LOGS__.unshift(newLog);
   return newLog;
 }
 
 export function resetAuditLogs(): void {
-  runtimeAuditLogs = [...seedAuditLogs];
+  globalAudit.__SIH_AUDIT_LOGS__ = [...seedAuditLogs];
 }

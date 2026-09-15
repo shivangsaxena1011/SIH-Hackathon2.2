@@ -65,7 +65,10 @@ export default function CaseWorkspacePage({
   const priorityScore = useMemo(() => calculateInvestigationPriorityScore(c.id), [c.id]);
   const graphData = useMemo(() => getCaseGraph(c.id), [c.id]);
 
-  const linkedPersons = useMemo(() => seedPersons.filter(p => p.associatedCaseIds.includes(c.id)), [c.id]);
+  const linkedPersons = useMemo(
+    () => seedPersons.filter(p => (p.associatedCaseIds || []).includes(c.id) || (p.associatedCaseIds || []).includes(c.caseNumber)),
+    [c.id, c.caseNumber]
+  );
   const primaryPerson = useMemo(() => {
     if (c.id === 'C-001' || c.caseNumber === '2026-041') {
       return seedPersons.find(p => p.id === 'P-1042') || linkedPersons[0];

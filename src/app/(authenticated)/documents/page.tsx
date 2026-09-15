@@ -11,9 +11,9 @@ export default function DocumentsPage() {
   const [searchTerm, setSearchTerm] = useState('');
   
   const filteredDocs = seedDocuments.filter(doc => 
-    doc.documentId.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    doc.fileName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    doc.caseId.toLowerCase().includes(searchTerm.toLowerCase())
+    (doc.documentId || '').toLowerCase().includes(searchTerm.toLowerCase()) || 
+    (doc.fileName || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (doc.caseId || '').toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (

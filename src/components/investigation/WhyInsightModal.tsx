@@ -102,7 +102,7 @@ export default function WhyInsightModal({
                     <div className="flex items-center gap-2 mt-2 text-[10px] font-mono text-gray-500">
                       <span>Source: {step.source}</span>
                       {step.timestamp && (
-                        <span>• {new Date(step.timestamp).toLocaleString()}</span>
+                        <span>• {step.timestamp ? new Date(step.timestamp).toLocaleString() : '—'}</span>
                       )}
                     </div>
                   </div>
@@ -124,7 +124,7 @@ export default function WhyInsightModal({
                 <Lightbulb className="w-4 h-4" /> Recommended Officer Verification Steps
               </div>
               <ul className="list-disc list-inside space-y-1 text-xs text-gray-400">
-                {chain.verificationRecommendations.map((rec, i) => (
+                {(chain.verificationRecommendations || []).map((rec, i) => (
                   <li key={i}>{rec}</li>
                 ))}
               </ul>

@@ -1,4 +1,5 @@
 import { seedCases } from '@/data/seed';
+import { findCanonicalCase } from '@/lib/cases/case-service';
 
 export interface AIInsight {
   id: string;
@@ -16,7 +17,7 @@ export interface AIInsight {
 }
 
 export function generateCaseSummary(caseId: string): string {
-  const caseData = seedCases.find(c => c.id === caseId);
+  const caseData = findCanonicalCase(caseId) || seedCases.find(c => c.id === caseId);
   if (!caseData) return 'Case not found.';
   return `${caseData.title} (${caseData.status}): ${caseData.description}`;
 }

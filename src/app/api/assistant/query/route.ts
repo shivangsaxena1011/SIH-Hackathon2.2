@@ -4,7 +4,8 @@ import { getNodeDegree } from '@/lib/graph/graph-service';
 
 export async function POST(req: Request) {
   try {
-    const { query } = await req.json();
+    const body = await req.json().catch(() => ({}));
+    const query = body.query;
     if (!query || typeof query !== 'string') {
       return NextResponse.json({ error: 'Valid query string required' }, { status: 400 });
     }
@@ -196,8 +197,8 @@ You can view the full printable dossier or export markdown in the Investigation 
       if (matchedPerson) {
         response = `Profile for ${matchedPerson.name} (${matchedPerson.id}):
 • Status: ${matchedPerson.status} | Priority: ${matchedPerson.riskLevel}
-• Aliases: ${matchedPerson.aliases.join(', ') || 'None recorded'}
-• Associated Cases: ${matchedPerson.associatedCaseIds.join(', ')}
+• Aliases: ${(matchedPerson.aliases || []).join(', ') || 'None recorded'}
+• Associated Cases: ${(matchedPerson.associatedCaseIds || []).join(', ') || 'None'}
 • Date of Birth: ${matchedPerson.dob || 'Unspecified'} | Nationality: ${matchedPerson.nationality || 'IND'}`;
         sources = [`Person Registry: ${matchedPerson.id}`];
       } else {
@@ -208,7 +209,7 @@ You can view the full printable dossier or export markdown in the Investigation 
 • "What is the priority score for Case 2026-041?"
 • "What changed in Case 2026-041?"
 • "Summarize Case #2026-041"`;
-        sources = ["SENTINEL AI Knowledge Base (Demo)"];
+        sources = ["TRISHUL AI Knowledge Base (Demo)"];
       }
     }
 

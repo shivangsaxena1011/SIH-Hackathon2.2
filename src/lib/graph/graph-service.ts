@@ -29,9 +29,9 @@ export function getFullGraph(): GraphData {
   seedPersons.forEach(p => {
     nodes.push({
       id: p.id, entityId: p.id, entityType: 'PERSON', label: p.name,
-      properties: { riskLevel: p.riskLevel, status: p.status, aliases: p.aliases.join(', ') },
+      properties: { riskLevel: p.riskLevel, status: p.status, aliases: (p.aliases || []).join(', ') },
       connectionCount: entityCountMap[p.id] || 0,
-      caseIds: p.associatedCaseIds, riskLevel: p.riskLevel
+      caseIds: p.associatedCaseIds || [], riskLevel: p.riskLevel
     });
   });
 
@@ -125,7 +125,7 @@ export function getCaseGraph(caseId: string): GraphData {
   const caseNum = getCaseNumber(caseId).toLowerCase();
 
   const nodes = fullGraph.nodes.filter(n =>
-    n.caseIds.some(cid => {
+    (n.caseIds || []).some(cid => {
       const c = cid.toLowerCase();
       return c === canonicalId || c === caseNum;
     })
@@ -179,6 +179,6 @@ export const calculateCentrality = getNodeDegree;
 
 export function getCrossCaseConnections() {
   const fullGraph = getFullGraph();
-  const entitiesInMultipleCases = fullGraph.nodes.filter(n => n.caseIds.length > 1);
+  const entitiesInMultipleCases = fullGraph.nodes.filter(n => (n.caseIds || []).length > 1);
   return entitiesInMultipleCases;
 }

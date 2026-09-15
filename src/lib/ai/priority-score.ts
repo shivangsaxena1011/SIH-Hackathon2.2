@@ -23,7 +23,7 @@ export function calculateInvestigationPriorityScore(entityOrCaseId: string): Inv
   if (person) {
     const degree = getNodeDegree(person.id);
     const hasSuspectDoc = seedDocuments.some(d => d.personId === person.id && d.forensicData?.overallScore && d.forensicData.overallScore < 85);
-    const caseCount = person.associatedCaseIds.length;
+    const caseCount = (person.associatedCaseIds || []).length;
 
     if (hasSuspectDoc) {
       factors.push({

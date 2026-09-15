@@ -74,7 +74,7 @@ export default function InvestigationChangeBanner({ caseQuery }: InvestigationCh
                   <div>
                     <h3 className="text-lg font-space font-bold text-white">WHAT CHANGED IN THIS INVESTIGATION?</h3>
                     <p className="text-xs text-gray-400">
-                      Case #{delta.caseNumber} • Deltas since {new Date(delta.lastReviewedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                      Case #{delta.caseNumber} • Deltas since {delta.lastReviewedAt ? new Date(delta.lastReviewedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '08:00 AM'}
                     </p>
                   </div>
                 </div>
@@ -105,7 +105,7 @@ export default function InvestigationChangeBanner({ caseQuery }: InvestigationCh
                           {item.type.replace(/_/g, ' ')}
                         </span>
                         <span className="text-[10px] font-mono text-gray-500">
-                          {new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                          {item.timestamp ? new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '—'}
                         </span>
                       </div>
                       <h4 className="text-xs font-bold text-white mt-1">{item.title}</h4>

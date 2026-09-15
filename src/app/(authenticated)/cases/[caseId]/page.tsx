@@ -127,17 +127,23 @@ export default function CaseDetailPage() {
   }
 
   // Filter linked items
-  const linkedPersons = seedPersons.filter(p => p.associatedCaseIds.includes(caseData.id));
+  const linkedPersons = seedPersons.filter(p => 
+    (p.associatedCaseIds || []).includes(caseData.id) || (p.associatedCaseIds || []).includes(caseData.caseNumber)
+  );
   const primaryPerson = (caseData.id === 'C-001' || caseData.caseNumber === '2026-041')
     ? (seedPersons.find(p => p.id === 'P-1042') || linkedPersons[0])
     : linkedPersons[0];
-  const linkedVehicles = seedVehicles.filter(v => v.associatedCaseIds.includes(caseData.id));
-  const linkedIdentifiers = seedIdentifiers.filter(i => i.associatedCaseIds.includes(caseData.id));
-  const linkedDocuments = seedDocuments.filter(d => d.caseId === caseData.id);
-  const linkedEvidence = seedEvidence.filter(e => e.caseId === caseData.id);
-  const linkedEvents = seedEvents.filter(e => e.caseId === caseData.id);
-  const linkedInsights = seedInsights.filter(i => i.caseId === caseData.id);
-  const linkedAudit = seedAuditLogs.filter(a => a.caseId === caseData.id);
+  const linkedVehicles = seedVehicles.filter(v => 
+    (v.associatedCaseIds || []).includes(caseData.id) || (v.associatedCaseIds || []).includes(caseData.caseNumber)
+  );
+  const linkedIdentifiers = seedIdentifiers.filter(i => 
+    (i.associatedCaseIds || []).includes(caseData.id) || (i.associatedCaseIds || []).includes(caseData.caseNumber)
+  );
+  const linkedDocuments = seedDocuments.filter(d => d.caseId === caseData.id || d.caseId === caseData.caseNumber);
+  const linkedEvidence = seedEvidence.filter(e => e.caseId === caseData.id || e.caseId === caseData.caseNumber);
+  const linkedEvents = seedEvents.filter(e => e.caseId === caseData.id || e.caseId === caseData.caseNumber);
+  const linkedInsights = seedInsights.filter(i => i.caseId === caseData.id || i.caseId === caseData.caseNumber);
+  const linkedAudit = seedAuditLogs.filter(a => a.caseId === caseData.id || a.caseId === caseData.caseNumber);
 
   const tabs = [
     { id: 'overview', label: 'Overview' },

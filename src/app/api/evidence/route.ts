@@ -1,15 +1,17 @@
 import { NextResponse } from 'next/server';
 import { seedEvidence } from '@/data/seed';
+import { getCanonicalCaseId, getCaseNumber } from '@/lib/cases/case-service';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const caseId = searchParams.get('caseId');
-  if (caseId) {
-    const clean = caseId.toLowerCase().replace(/^(case[#\-_]?|#)/i, '');
-    const filtered = seedEvidence.filter(e =>
-      e.caseId.toLowerCase() === caseId.toLowerCase() ||
-      e.caseId.toLowerCase() === clean
-    );
+  const caseQuery = searchParams.get('caseId');
+  if (caseQuery) {
+    const canonical = getCanonicalCaseId(caseQuery).toLowerCase();
+    const caseNum = getCaseNumber(caseQuery).toLowerCase();
+    const filtered = seedEvidence.filter(e => {
+      const eCase = (e.caseId || '').toLowerCase();
+      return eCase === canonical || eCase === caseNum;
+    });
     return NextResponse.json(filtered);
   }
   return NextResponse.json(seedEvidence);
